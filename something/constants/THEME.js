@@ -1,10 +1,15 @@
+import { Platform } from 'react-native'
+
+
+const isAndroid = Platform.OS === 'android' ? true : false
+
 const COLORS = {
   BACKGROUND: "#1F3247",
   GREEN: '#43BA97'
 };
 
 const BUTTON = {
-  LOGIN: {backgroundColor:'#43BA97', paddingVertical:'1.5%', paddingHorizontal:'12%', borderRadius:8}
+  LOGIN: {backgroundColor:'#43BA97', paddingVertical:'3%', paddingHorizontal:'32.5%', borderRadius:5, justifyContent:'center', alignItems:'center', }
 }
 
 const TEXT = {
@@ -16,6 +21,10 @@ const TEXT = {
   T6 : {fontSize:18, color:'white'},
   T7 : {fontSize:20, color:'white'},
   T8 : {fontSize:22, color:'white'},
+  T9 : {fontSize:24, color:'white'},
+  T10 : {fontSize:26, color:'white'},
+  T11 : {fontSize:28, color:'white'}
+  
 }
 
-export default {COLORS, BUTTON, TEXT};
+export default {COLORS, BUTTON, TEXT, isAndroid};
