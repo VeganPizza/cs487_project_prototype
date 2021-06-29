@@ -11,17 +11,15 @@ import {
 } from "react-native";
 import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
-import { IconButton, TextInput, Avatar } from "react-native-paper";
-import { ThemeProvider } from "@react-navigation/native";
-
+import {  TextInput, Avatar } from "react-native-paper";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 const LoginScreen = (props) => {
   const [typing, setTyping] = useState(false);
-  console.log(props.navigation);
+
   return (
     <View style={styles.container}>
-      <Header navigation={props.navigation} title={"Login Screen"} />
+      <Header navigation={props.navigation} title={"Login"} />
       <View style={{ flexDirection: "column", flex: 1 }}>
         <View
           style={{
@@ -129,7 +127,7 @@ const LoginScreen = (props) => {
            alignSelf:'center',
           }}
         >
-          <TouchableOpacity style={[THEME.BUTTON.LOGIN,]}>
+          <TouchableOpacity style={[THEME.BUTTON.LOGIN,]} onPress={()=>props.navigation.navigate("UserScreen")}>
             <Text style={THEME.TEXT.T7}>Login</Text>
           </TouchableOpacity>
         </View>

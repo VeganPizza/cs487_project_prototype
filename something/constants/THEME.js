@@ -5,7 +5,8 @@ const isAndroid = Platform.OS === 'android' ? true : false
 
 const COLORS = {
   BACKGROUND: "#1F3247",
-  GREEN: '#43BA97'
+  GREEN: '#43BA97',
+  BLUE:'#0091EA'
 };
 
 const BUTTON = {

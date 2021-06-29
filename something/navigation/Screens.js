@@ -1,8 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import {   SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import SampleScreen from "../screens/SampleScreen";
 import LoginScreen from "../screens/LoginScreen";
+import UserScreen from "../screens/UserScreen";
 
 function Screens(props) {
     const Stack = createStackNavigator();
@@ -12,6 +13,7 @@ function Screens(props) {
       <Stack.Navigator mode ="card" headerMode="none" screenOptions={{gestureEnabled:false}} initialRouteName="Sample">
         <Stack.Screen name="Sample" component={SampleScreen} options={{gestureEnabled:false}}/>
         <Stack.Screen name="Login" component={LoginScreen} options={{gestureEnabled:false}}/>
+        <Stack.Screen name="UserScreen" component={UserScreen}  options={{gestureEnabled:false}}></Stack.Screen>
         
       </Stack.Navigator>
     </SafeAreaView>
