@@ -51,22 +51,38 @@ def edit_password(usr, psswrd, confirm_psswrd, new_psswrd): # TODO: Update this 
         return False
 
 
-# Data Structure Code
+# Data structure code
 data_folder = "../data"
 
-users = pd.DataFrame(columns=["username", "password", "isStudent", "isTeacher"]).set_index("username")
-classes = pd.DataFrame(columns=["id", "name", "teachers", "students", "quizzes"]).set_index("id")
-quizzes = pd.DataFrame(columns=["id", "name", "questions", "submissions"]).set_index("id")
-questions = pd.DataFrame(columns=["id", "prompt", "answers", "ansIndex"]).set_index("id")
-
-def loadAll(): # Loads every dataframe from the data folder
+def load_csv(): # Loads every dataframe from the data folder
   global users, classes, quizzes, questions
-  users = pd.read_csv(data_folder + "/users.csv")
-  classes = pd.read_csv(data_folder + "/classes.csv")
-  quizzes = pd.read_csv(data_folder + "/quizzes.csv")
-  questions = pd.read_csv(data_folder + "/questions.csv")
 
-def saveAll(): # Saves the state of every dataframe
+  # Load users.csv; a blank template is loaded instead if the file does not exist.
+  try:
+    users = pd.read_csv(data_folder + "/users.csv")
+  except FileNotFoundError:
+    users = pd.DataFrame(columns=["username", "password", "isStudent", "isTeacher"]).set_index("username")
+  
+  # Load classes.csv; a blank template is loaded instead if the file does not exist.
+  try:
+    classes = pd.read_csv(data_folder + "/classes.csv")
+  except FileNotFoundError:
+    classes = pd.DataFrame(columns=["id", "name", "teachers", "students", "quizzes"]).set_index("id")
+
+  # Load quizzes.csv; a blank template is loaded instead if the file does not exist.
+  try:
+    quizzes = pd.read_csv(data_folder + "/quizzes.csv")
+  except FileNotFoundError:
+    quizzes = pd.DataFrame(columns=["id", "name", "questions", "submissions"]).set_index("id")
+
+  # Load questions.csv; a blank template is loaded instead if the file does not exist.
+  try:
+    questions = pd.read_csv(data_folder + "/questions.csv")
+  except FileNotFoundError:
+    questions = pd.DataFrame(columns=["id", "prompt", "answers", "ansIndex"]).set_index("id")
+
+
+def save_csv(): # Saves the state of every dataframe
   global users, classes, quizzes, questions
   users.to_csv(data_folder + "/users.csv")
   classes.to_csv(data_folder + "/classes.csv")
@@ -74,34 +90,40 @@ def saveAll(): # Saves the state of every dataframe
   questions.to_csv(data_folder + "/questions.csv")
 
 
-# Data accessing/editing functions
+
+#Data accessing/editing functions
 
 def addUser(username, password, isStudent, isTeacher):
   if username in users.index.values:
     raise ValueError("Username Already Taken")
   else:
     users.loc[username] = ([password, isStudent, isTeacher]) # Add the user to the users dataframe
-    saveAll()
+    save_csv()
+
 
 def delUser(username):
   users.drop(username, inplace=True)
-  saveAll()
+  save_csv()
+
 
 def addClass(name, teachers, students):
   id = classes.shape[0]                            # The next available Class ID
   classes.loc[id] = (name, teachers, students, []) # Add the class to the classes dataframe
-  saveAll()
+  save_csv()
+
 
 def addQuiz(class_id, name, questions):
   id = quizzes.shape[0]                       # The next available Quiz ID
   quizzes.loc[id] = (name, questions, [])     # Add the quiz to the quizzes dataframe
   classes.loc[class_id, "quizzes"].append(id) # Add quiz to the given class
-  saveAll()
+  save_csv()
+
 
 def addQuestion(prompt, answers, ansIndex):
   id = questions.shape[0]                         # The next available Quiz ID
   questions.loc[id] = (prompt, answers, ansIndex) # Add the question to the dataframe
-  saveAll()
+  save_csv()
+
 
 # Old class structure (To replace, but the database implementation can't replace it just yet, so I'm leaving it so the rest of the code will still run)
 
