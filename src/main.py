@@ -1,5 +1,6 @@
 import json
 import numpy as np
+import pandas as pd
 
 import os
 script_dir = os.path.dirname(__file__)
@@ -13,7 +14,7 @@ data = np.array(data)
 f.close()
 
 
-def look_up_user(usr, psswrd):
+def look_up_user(usr, psswrd): # TODO: Update this to use the new data structues
     valid = False
     for d in data:
         if d["username"] == usr and d["password"] == psswrd:
@@ -28,7 +29,7 @@ def login(usr, psswrd):
     return look_up_user(usr, psswrd)
 
 
-def edit_username(usr, psswrd, new_usrname):
+def edit_username(usr, psswrd, new_usrname): # TODO: Update this to use the new data structures
     valid = look_up_user(usr, psswrd)
     if valid:
         for d in data:
@@ -39,7 +40,7 @@ def edit_username(usr, psswrd, new_usrname):
         return False
 
 
-def edit_password(usr, psswrd, confirm_psswrd, new_psswrd):
+def edit_password(usr, psswrd, confirm_psswrd, new_psswrd): # TODO: Update this to use the new data structures
     valid = look_up_user(usr, psswrd)
     if valid:
         for d in data:
@@ -49,6 +50,60 @@ def edit_password(usr, psswrd, confirm_psswrd, new_psswrd):
     else:
         return False
 
+
+# Data Structure Code
+data_folder = "../data"
+
+users = pd.DataFrame(columns=["username", "password", "isStudent", "isTeacher"]).set_index("username")
+classes = pd.DataFrame(columns=["id", "name", "teachers", "students", "quizzes"]).set_index("id")
+quizzes = pd.DataFrame(columns=["id", "name", "questions", "submissions"]).set_index("id")
+questions = pd.DataFrame(columns=["id", "prompt", "answers", "ansIndex"]).set_index("id")
+
+def loadAll(): # Loads every dataframe from the data folder
+  global users, classes, quizzes, questions
+  users = pd.read_csv(data_folder + "/users.csv")
+  classes = pd.read_csv(data_folder + "/classes.csv")
+  quizzes = pd.read_csv(data_folder + "/quizzes.csv")
+  questions = pd.read_csv(data_folder + "/questions.csv")
+
+def saveAll(): # Saves the state of every dataframe
+  global users, classes, quizzes, questions
+  users.to_csv(data_folder + "/users.csv")
+  classes.to_csv(data_folder + "/classes.csv")
+  quizzes.to_csv(data_folder + "/quizzes.csv")
+  questions.to_csv(data_folder + "/questions.csv")
+
+
+# Data accessing/editing functions
+
+def addUser(username, password, isStudent, isTeacher):
+  if username in users.index.values:
+    raise ValueError("Username Already Taken")
+  else:
+    users.loc[username] = ([password, isStudent, isTeacher]) # Add the user to the users dataframe
+    saveAll()
+
+def delUser(username):
+  users.drop(username, inplace=True)
+  saveAll()
+
+def addClass(name, teachers, students):
+  id = classes.shape[0]                            # The next available Class ID
+  classes.loc[id] = (name, teachers, students, []) # Add the class to the classes dataframe
+  saveAll()
+
+def addQuiz(class_id, name, questions):
+  id = quizzes.shape[0]                       # The next available Quiz ID
+  quizzes.loc[id] = (name, questions, [])     # Add the quiz to the quizzes dataframe
+  classes.loc[class_id, "quizzes"].append(id) # Add quiz to the given class
+  saveAll()
+
+def addQuestion(prompt, answers, ansIndex):
+  id = questions.shape[0]                         # The next available Quiz ID
+  questions.loc[id] = (prompt, answers, ansIndex) # Add the question to the dataframe
+  saveAll()
+
+# Old class structure (To replace, but the database implementation can't replace it just yet, so I'm leaving it so the rest of the code will still run)
 
 class Student:
     def __init__(self, firstname, lastname, classes, score):
