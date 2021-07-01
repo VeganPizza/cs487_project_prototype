@@ -23,11 +23,11 @@ const HomeScreen = (props) => {
     <View style={styles.container}>
       <View style={{ flexDirection: "column", width: "100%" }}>
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-          <TouchableOpacity style={styles.homeButton}>
+          <TouchableOpacity style={styles.homeButton} onPress={()=>props.navigation.navigate("AssignmentsScreen")}>
             <Text style={THEME.TEXT.T5}>Assignments</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.homeButton}>
+          <TouchableOpacity style={styles.homeButton} onPress={()=>{props.navigation.navigate('MessagesScreen')}}>
             <Text style={THEME.TEXT.T5}>Messages</Text>
             <Avatar.Icon
               size={25}
@@ -38,10 +38,10 @@ const HomeScreen = (props) => {
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-          <TouchableOpacity style={[styles.homeButton, { padding: 0 }]}>
+          <TouchableOpacity style={[styles.homeButton, { padding: 0 }]} onPress={()=>{props.navigation.navigate('SettingsScreen')}}>
             <Avatar.Icon
               icon="cog-outline"
-              size={42}
+              size={32}
               backgroundColor="transparent"
               style={{ alignSelf: "center" }}
             ></Avatar.Icon>
@@ -51,7 +51,12 @@ const HomeScreen = (props) => {
           ></View>
         </View>
       </View>
-      <View styles={{ flexDirection: "row", marginTop: 20 }} width={width}>
+
+      <View
+        styles={{ flexDirection: "row", marginTop: 20 }}
+        width={width}
+        height={height * 0.45}
+      >
         <View
           style={{ flexDirection: "row", alignItems: "flex-start", margin: 20 }}
         >
@@ -63,11 +68,67 @@ const HomeScreen = (props) => {
             alignItems: "flex-start",
             marginTop: 10,
           }}
-          width="80%"
+          width={width}
           alignSelf="center"
         >
-          <Text style={{}}>
-            <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>
+          <ScrollView style={{ height: height * 0.4, width: width }}>
+            <Text style={{ textAlign: "left", flexShrink: 1}}>
+              <View
+                style={{ width: "100%", height: "auto", flexDirection: "row" }}
+              >
+                <Text
+                  style={{
+                    width: width * 0.6,
+                    textAlign: "left",
+                    
+                    padding: 15,
+                    flexWrap: "wrap-reverse",
+                    color: "white",
+                    alignSelf:'center',
+                    textAlignVertical:'auto',
+                    textAlign:'center'
+                  }}
+                >
+                  {" "}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                  accumsan nulla quis dapibus ultricies. Duis lacinia feugiat
+                  lacus, eleifend blandit sapien consequat et. Pellentesque in
+                  congue risus, auctor suscipit purus. Fusce pulvinar metus
+                  tempor velit lacinia euismod. Integer sit amet magna ut urna
+                  commodo rhoncus. Nullam rutrum elit et velit scelerisque
+                  tempor. Aenean vulputate consequat facilisis. Fusce
+                  pellentesque pretium ligula et semper. Cras sit amet volutpat
+                  sem. Integer malesuada tortor quam, id convallis tortor
+                  consequat in. Vivamus pretium tincidunt dui ut tincidunt.
+                  Donec vitae turpis in dolor finibus dictum. Donec sed eros at
+                  lacus rutrum sodales. Sed sed aliquet libero. Mauris suscipit
+                  est eget purus consectetur accumsan. Sed vel turpis nec nisi
+                  vehicula sagittis. Nunc interdum lacus at interdum fermentum.
+                  Pellentesque rhoncus suscipit nisi at fermentum. Duis dictum
+                  bibendum metus, et mollis odio tristique feugiat. Suspendisse
+                  euismod sapien lectus, ac congue lectus congue tincidunt.
+                  Integer commodo iaculis sapien in iaculis. Aliquam id urna ac
+                  justo aliquam blandit. Ut erat lorem, sagittis eu quam eget,
+                  scelerisque tristique nunc. Morbi ornare pharetra auctor. In
+                  urna nulla, interdum a maximus a, facilisis vitae ex.
+                  Vestibulum ex lorem, tempor a placerat et, bibendum vitae
+                  ipsum. Nunc malesuada quam vitae fringilla ullamcorper.
+                  Vestibulum dictum velit.
+                </Text>
+                <Image
+                  style={{
+                    width: 128,
+                    height: 128,
+                    resizeMode:'contain',
+                    marginVertical: 15,
+                   
+                    flexWrap: "wrap",top:75
+                  }}
+                  source={require("./../../images/Logo.png")}
+                ></Image>
+              </View>
+
+              {/* <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>
               <View
                 style={{
                   flex: 1,
@@ -122,30 +183,12 @@ const HomeScreen = (props) => {
                   Vestibulum dictum velit.
                 </Text>
               </View>
-            </ScrollView>
-          </Text>
+            </ScrollView> */}
+            </Text>
+          </ScrollView>
         </View>
       </View>
-      <View
-        styles={{ flexDirection: "row", marginTop: 25,justifyContent:"flex-end" }}
-        width={width}
-        marginTop={20} 
-        
-      >
-        <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
-          Progress This Week
-        </Text>
-        <Progress.Bar
-          color={THEME.COLORS.GREEN}
-          alignSelf="center"
-          marginTop={5}
-          animated={true}
-          progress={0.8}
-        ></Progress.Bar>
-        <Text style={[THEME.TEXT.T8,{textAlign:'center', marginTop:5, fontWeight:'bold'}]} >
-          APP NAME
-        </Text>
-      </View>
+     
     </View>
   );
 };
@@ -163,7 +206,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: "2.5%",
     width: width * 0.3,
-    padding: 7.5,
+    padding: 5,
     borderRadius: 8,
     justifyContent: "space-evenly",
     alignItems: "center",
