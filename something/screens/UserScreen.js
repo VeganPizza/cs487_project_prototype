@@ -15,15 +15,22 @@ import Header from "../navigation/Header";
 import { TextInput, Avatar } from "react-native-paper";
 import HomeScreen from "./UserScreens/HomeScreen"
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-
+import { NavigationContainer } from '@react-navigation/native'
+import ScreensClasses from '../navigation/ScreensClasses'
+import ScreensHome from '../navigation/ScreensHome'
+import * as Progress from "react-native-progress";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 const FirstRoute = () => (
-    <HomeScreen/>
+  <NavigationContainer independent={true}>
+  <ScreensHome/>
+</NavigationContainer>
   );
   
   const SecondRoute = () => (
-    <View style={{ flex: 1,  }} />
+    <NavigationContainer independent={true}>
+      <ScreensClasses/>
+    </NavigationContainer>
   );
 
 const UserScreen = (props) => {
@@ -47,7 +54,7 @@ const UserScreen = (props) => {
           <Text style={THEME.TEXT.T5} weight='bold'>{route.title}</Text>
         </View>
       )}
-      indicatorStyle={{ backgroundColor: "white" }}
+      indicatorStyle={{ backgroundColor: THEME.COLORS.BLUE }}
       style={styles.tabBar}
     />
   );
@@ -55,7 +62,7 @@ const UserScreen = (props) => {
  
   return (
     <View style={styles.container}>
-      <Header navigation={props.navigation} title={"User Menu"} />
+      <Header navigation={props.navigation} title={"User Menu"} logout={true} />
       <View style={{width:'100%', height:height-10, marginTop:10}}>
       <TabView
       renderTabBar={renderTabBar}
@@ -63,9 +70,38 @@ const UserScreen = (props) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }
+
     }
+    swipeEnabled={false}
 
     />
+     <View
+        styles={{ flexDirection: "row", justifyContent: "flex-end" }}
+        width={width}
+        flex={0.75}
+        justifyContent="center"
+        bottom={15}
+      >
+        <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
+          Progress This Week
+        </Text>
+        <Progress.Bar
+          color={THEME.COLORS.GREEN}
+          alignSelf="center"
+          marginTop={5}
+          animated={true}
+          progress={0.8}
+          width={width/1.5}
+        ></Progress.Bar>
+        <Text
+          style={[
+            THEME.TEXT.T8,
+            { textAlign: "center", marginTop: 5, fontWeight: "bold" },
+          ]}
+        >
+          APP NAME
+        </Text>
+      </View>
       </View>
          
         
@@ -85,8 +121,8 @@ const styles = StyleSheet.create({
     color: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    borderColor:THEME.COLORS.GREEN,
-    borderWidth:1,
+    borderColor:THEME.COLORS.BACKGROUND,
+    borderWidth:0,
     borderBottomColor:'transparent',
     borderBottomWidth:0,
     

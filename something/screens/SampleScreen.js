@@ -8,7 +8,6 @@ const SampleScreen = (props) => {
   console.log(props.navigation)
   return (
     <View style={styles.container}>
-     
       <TouchableOpacity style={THEME.BUTTON.LOGIN} onPress={()=>{props.navigation.navigate('Login')}}>
         <Text style={THEME.TEXT.T7}>Navigate</Text>
       </TouchableOpacity>
