@@ -32,7 +32,7 @@ const LoginScreen = (props) => {
   //         //Error
   //     }
   // };
-    let login = () => {
+    login = () => {
         fetch(BASE_URL + "login", {
             method: 'POST',
             body: JSON.stringify({
