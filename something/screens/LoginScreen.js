@@ -188,3 +188,8 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
+async function login(username, password) {
+    const response = await zlFetch.post()
+}
+

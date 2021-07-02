@@ -18,6 +18,11 @@ import * as Progress from "react-native-progress";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 
+
+let announcement;
+announcement = {};
+
+
 const HomeScreen = (props) => {
   return (
     <View style={styles.container}>
@@ -79,8 +84,8 @@ const HomeScreen = (props) => {
                 <Text
                   style={{
                     width: width * 0.6,
-                    textAlign: "left",
-                    
+                    // textAlign: "left",
+
                     padding: 15,
                     flexWrap: "wrap-reverse",
                     color: "white",
@@ -89,31 +94,33 @@ const HomeScreen = (props) => {
                     textAlign:'center'
                   }}
                 >
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                  accumsan nulla quis dapibus ultricies. Duis lacinia feugiat
-                  lacus, eleifend blandit sapien consequat et. Pellentesque in
-                  congue risus, auctor suscipit purus. Fusce pulvinar metus
-                  tempor velit lacinia euismod. Integer sit amet magna ut urna
-                  commodo rhoncus. Nullam rutrum elit et velit scelerisque
-                  tempor. Aenean vulputate consequat facilisis. Fusce
-                  pellentesque pretium ligula et semper. Cras sit amet volutpat
-                  sem. Integer malesuada tortor quam, id convallis tortor
-                  consequat in. Vivamus pretium tincidunt dui ut tincidunt.
-                  Donec vitae turpis in dolor finibus dictum. Donec sed eros at
-                  lacus rutrum sodales. Sed sed aliquet libero. Mauris suscipit
-                  est eget purus consectetur accumsan. Sed vel turpis nec nisi
-                  vehicula sagittis. Nunc interdum lacus at interdum fermentum.
-                  Pellentesque rhoncus suscipit nisi at fermentum. Duis dictum
-                  bibendum metus, et mollis odio tristique feugiat. Suspendisse
-                  euismod sapien lectus, ac congue lectus congue tincidunt.
-                  Integer commodo iaculis sapien in iaculis. Aliquam id urna ac
-                  justo aliquam blandit. Ut erat lorem, sagittis eu quam eget,
-                  scelerisque tristique nunc. Morbi ornare pharetra auctor. In
-                  urna nulla, interdum a maximus a, facilisis vitae ex.
-                  Vestibulum ex lorem, tempor a placerat et, bibendum vitae
-                  ipsum. Nunc malesuada quam vitae fringilla ullamcorper.
-                  Vestibulum dictum velit.
+
+
+                  {/*{" "}*/}
+                  {/*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam*/}
+                  {/*accumsan nulla quis dapibus ultricies. Duis lacinia feugiat*/}
+                  {/*lacus, eleifend blandit sapien consequat et. Pellentesque in*/}
+                  {/*congue risus, auctor suscipit purus. Fusce pulvinar metus*/}
+                  {/*tempor velit lacinia euismod. Integer sit amet magna ut urna*/}
+                  {/*commodo rhoncus. Nullam rutrum elit et velit scelerisque*/}
+                  {/*tempor. Aenean vulputate consequat facilisis. Fusce*/}
+                  {/*pellentesque pretium ligula et semper. Cras sit amet volutpat*/}
+                  {/*sem. Integer malesuada tortor quam, id convallis tortor*/}
+                  {/*consequat in. Vivamus pretium tincidunt dui ut tincidunt.*/}
+                  {/*Donec vitae turpis in dolor finibus dictum. Donec sed eros at*/}
+                  {/*lacus rutrum sodales. Sed sed aliquet libero. Mauris suscipit*/}
+                  {/*est eget purus consectetur accumsan. Sed vel turpis nec nisi*/}
+                  {/*vehicula sagittis. Nunc interdum lacus at interdum fermentum.*/}
+                  {/*Pellentesque rhoncus suscipit nisi at fermentum. Duis dictum*/}
+                  {/*bibendum metus, et mollis odio tristique feugiat. Suspendisse*/}
+                  {/*euismod sapien lectus, ac congue lectus congue tincidunt.*/}
+                  {/*Integer commodo iaculis sapien in iaculis. Aliquam id urna ac*/}
+                  {/*justo aliquam blandit. Ut erat lorem, sagittis eu quam eget,*/}
+                  {/*scelerisque tristique nunc. Morbi ornare pharetra auctor. In*/}
+                  {/*urna nulla, interdum a maximus a, facilisis vitae ex.*/}
+                  {/*Vestibulum ex lorem, tempor a placerat et, bibendum vitae*/}
+                  {/*ipsum. Nunc malesuada quam vitae fringilla ullamcorper.*/}
+                  {/*Vestibulum dictum velit.*/}
                 </Text>
                 <Image
                   style={{
@@ -121,7 +128,7 @@ const HomeScreen = (props) => {
                     height: 128,
                     resizeMode:'contain',
                     marginVertical: 15,
-                   
+
                     flexWrap: "wrap",top:75
                   }}
                   source={require("./../../images/Logo.png")}
