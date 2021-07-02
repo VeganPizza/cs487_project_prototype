@@ -1,5 +1,5 @@
 from flask import Flask, request
-from src.main import *
+from src.userinputs import *
 
 # import json
 app = Flask(__name__)
@@ -19,11 +19,12 @@ def login():
         username = data['username']
         password = data['password']
         resp = {'result': False, 'user': None}
-        if login(username, password):
+        if user_login(username, password):
             resp['result'] = True
             resp['user'] = username
         else:
             print("error")
+        return json.dumps(resp)
 
 
 if __name__ == "__main__":

@@ -14,12 +14,13 @@ import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
 import {  TextInput, Avatar } from "react-native-paper";
 import {BASE_URL} from "./host";
-//import { login } from '/cs487_project_prototype/src.app.py';
+import { login } from '/src.app.py';
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
+let state = "global";
 const LoginScreen = (props) => {
   const [typing, setTyping] = useState(false);
-  const state = {
+  state = {
       username: '',
       password: ''
   }
@@ -32,32 +33,32 @@ const LoginScreen = (props) => {
   // };
 
 
-  // login = () => {
-  //     fetch(BASE_URL + "login", {
-  //         method: 'POST',
-  //         body: JSON.stringify({
-  //             email: this.state.username,
-  //             password: this.state.password
-  //         })
-  //     })
-  //         .then((resp) => {
-  //             return resp.json();
-  //         })
-  //         .then((jsonData) => {
-  //             console.log(JSON.stringify(jsonData));
-  //             if (jsonData['result'] === True) {
-  //                 AsyncStorage.setItem('USERNAME', jsonData.user);
-  //                 AsyncStorage.setItem('TOKEN', jsonData.token);
-  //                 alert("You are: "+jsonData['user']);
-  //                 this.props.navigation.navigate("UserScreen");
-  //             }
-  //             else {
-  //                 alert("Incorrect username or password. Please, Try again");
-  //             }
-  //         }).catch((e)=>{
-  //             console.log(e)
-  //     })
-  // }
+  login = () => {
+      fetch(BASE_URL + "login", {
+          method: 'POST',
+          body: JSON.stringify({
+              email: this.state.username,
+              password: this.state.password
+          })
+      })
+          .then((resp) => {
+              return resp.json();
+          })
+          .then((jsonData) => {
+              console.log(JSON.stringify(jsonData));
+              if (jsonData['result'] === True) {
+                  AsyncStorage.setItem('USERNAME', jsonData.user);
+                  AsyncStorage.setItem('TOKEN', jsonData.token);
+                  alert("You are: "+jsonData['user']);
+                  this.props.navigation.navigate("UserScreen");
+              }
+              else {
+                  alert("Incorrect username or password. Please, Try again");
+              }
+          }).catch((e)=>{
+              console.log(e)
+      })
+  }
   return (
     <View style={styles.container}>
       <Header navigation={props.navigation} title={"Login"} />
