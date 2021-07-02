@@ -32,7 +32,6 @@ const LoginScreen = (props) => {
   //     }
   // };
 
-
   login = () => {
       fetch(BASE_URL + "login", {
           method: 'POST',
