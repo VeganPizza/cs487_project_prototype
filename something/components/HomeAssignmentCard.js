@@ -21,7 +21,7 @@ const { width, height } = Dimensions.get("screen");
 import * as Animatable from "react-native-animatable";
 const HomeAssignmentCard = (props) => {
     const [progress, setPorgress]= useState(props.progress)
-    
+    const role = props.role
 
     const fadeIn = {
         0: {
@@ -39,6 +39,7 @@ const HomeAssignmentCard = (props) => {
       };
 
   return (
+    (role === 'faculty') ? 
       <Animatable.View style={styles.container} animation={fadeIn}>
              <LinearGradient style={styles.container}
     colors={['#042630', '#006f56', THEME.COLORS.GREEN]} 
@@ -47,7 +48,7 @@ const HomeAssignmentCard = (props) => {
      end={[0.6, 0.8]}
     >
         <TouchableOpacity style={{justifyContent:"flex-start", alignSelf:'center', alignItems:'center'}}
-        onPress={()=>navigation.navigate('ClassScreen')}>
+        >
         <View style={{justifyContent:"flex-start", marginTop:15, height:"25%"}}>
     <Text style={[THEME.TEXT.T6,{fontWeight:'bold', letterSpacing:2, textAlign:'center'}]}>{props.assignmentName}</Text>
     <Text style={[THEME.TEXT.T4,{ letterSpacing:2, textAlign:'center'}]}>{props.className}</Text>
@@ -58,20 +59,52 @@ const HomeAssignmentCard = (props) => {
      </View>
 
      <View style={{justifyContent:"center", height:"25%", marginTop:10}}>
-     <Text style={[THEME.TEXT.T6,{fontWeight:'bold', letterSpacing:2, textAlign:"center"}]}>Grade: {Math.round(props.progress * 1000)/10}%</Text>
-     <Progress.Bar
-          color={THEME.COLORS.BLUE}
-          alignSelf="center"
-          marginTop={5}
-          animated={true}
-          progress={progress}
-          width={width*.2}
-        ></Progress.Bar>
+     <View style={{padding:5, paddingHorizontal:'12%', justifyContent:'center', alignSelf:'center', borderRadius:8, backgroundColor:THEME.COLORS.BLUE}}>
+        <Text style={THEME.TEXT.T4}>
+          View Data
+        </Text>
+      </View>
      </View>
         </TouchableOpacity>
      
     </LinearGradient>
     </Animatable.View>
+
+    :
+
+    <Animatable.View style={styles.container} animation={fadeIn}>
+    <LinearGradient style={styles.container}
+colors={['#042630', '#006f56', THEME.COLORS.GREEN]} 
+
+start={[0.6, 0.0]}
+end={[0.6, 0.8]}
+>
+<TouchableOpacity style={{justifyContent:"flex-start", alignSelf:'center', alignItems:'center'}}
+onPress={()=>navigation.navigate('QuizScreen')}>
+<View style={{justifyContent:"flex-start", marginTop:15, height:"25%"}}>
+<Text style={[THEME.TEXT.T6,{fontWeight:'bold', letterSpacing:2, textAlign:'center'}]}>{props.assignmentName}</Text>
+<Text style={[THEME.TEXT.T4,{ letterSpacing:2, textAlign:'center'}]}>{props.className}</Text>
+</View> 
+
+<View style={{justifyContent:"flex-start", height:"25%", marginBottom:10}}>
+<Avatar.Icon backgroundColor='transparent' icon='notebook' />
+</View>
+
+<View style={{justifyContent:"center", height:"25%", marginTop:10}}>
+<Text style={[THEME.TEXT.T6,{fontWeight:'bold', letterSpacing:2, textAlign:"center"}]}>Grade: {Math.round(props.progress * 1000)/10}%</Text>
+<Progress.Bar
+ color={THEME.COLORS.BLUE}
+ alignSelf="center"
+ marginTop={5}
+ animated={true}
+ progress={progress}
+ width={width*.2}
+></Progress.Bar>
+</View>
+</TouchableOpacity>
+
+</LinearGradient>
+</Animatable.View>
   );
 };
 

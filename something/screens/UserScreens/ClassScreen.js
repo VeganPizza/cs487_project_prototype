@@ -22,15 +22,18 @@ const { width, height } = Dimensions.get("screen");
 const cardsArrayInfo = [{progress:0, assignmentName:'Quiz 1'}, {progress:.55, assignmentName:'Quiz 2'},
 {progress:.86, assignmentName:'Quiz 3'}]
 
-const renderCards = () =>{
-    let output = []
-    for (const element of cardsArrayInfo) output.push(<AssignmentCard progress={element.progress} assignmentName={element.assignmentName}/>)
-        
-    return  <ScrollView style={{ height: height * 0.3, width: width }} horizontal={true}>
-    {output}
-   </ScrollView>
-}
+
 const ClassScreen = (props) => {
+
+const role= props.role
+const renderCards = () =>{
+  let output = []
+  for (const element of cardsArrayInfo) output.push(<AssignmentCard progress={element.progress} assignmentName={element.assignmentName} role={role} navigation={props.navigation}/>)
+      
+  return  <ScrollView style={{ height: height * 0.3, width: width }} horizontal={true}>
+  {output}
+ </ScrollView>
+}
   return (
     <View style={styles.container}>
       

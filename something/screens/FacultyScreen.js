@@ -13,7 +13,7 @@ import {
 import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
 import { TextInput, Avatar } from "react-native-paper";
-import HomeScreen from "./FacultyScreens/HomeScreen"
+
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { NavigationContainer } from '@react-navigation/native'
 import ScreensClasses from '../navigation/ScreensClasses'
@@ -22,14 +22,14 @@ import * as Progress from "react-native-progress";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 const FirstRoute = () => (
-  <NavigationContainer independent={true}>
-  <ScreensHome/>
+  <NavigationContainer independent={true} role={'faculty'}>
+  <ScreensHome role={'faculty'}/>
 </NavigationContainer>
   );
   
   const SecondRoute = () => (
-    <NavigationContainer independent={true}>
-      <ScreensClasses/>
+    <NavigationContainer independent={true} role={'faculty'}>
+      <ScreensClasses role={'faculty'}/>
     </NavigationContainer>
   );
 

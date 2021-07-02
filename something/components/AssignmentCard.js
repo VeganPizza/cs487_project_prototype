@@ -19,9 +19,10 @@ import {Avatar} from 'react-native-paper'
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 import * as Animatable from "react-native-animatable";
+import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace";
 const AssignmentCard = (props) => {
     const [progress, setPorgress]= useState(props.progress)
-    
+    const role = props.role
 
     const fadeIn = {
         0: {
@@ -38,7 +39,10 @@ const AssignmentCard = (props) => {
         },
       };
 
+const navigation = props.navigation
+const assignmentName = props.assignmentName
   return (
+    (role === 'faculty') ?
       <Animatable.View style={styles.container} animation={fadeIn}>
              <LinearGradient style={styles.container}
     colors={['#042630', '#006f56', THEME.COLORS.GREEN]} 
@@ -47,7 +51,39 @@ const AssignmentCard = (props) => {
      end={[0.6, 0.8]}
     >
         <TouchableOpacity style={{justifyContent:"flex-start", alignSelf:'center', alignItems:'center'}}
-        onPress={()=>navigation.navigate('ClassScreen')}>
+        >
+        <View style={{justifyContent:"flex-start", marginTop:15, height:"25%"}}>
+    <Text style={[THEME.TEXT.T6,{fontWeight:'bold', letterSpacing:2}]}>{props.assignmentName}</Text>
+    </View> 
+
+     <View style={{justifyContent:"flex-start", height:"25%", marginBottom:10}}>
+        <Avatar.Icon backgroundColor='transparent' icon='notebook' />
+     </View>
+
+     <View style={{justifyContent:"center", height:"25%", marginTop:10}}>
+    
+      <View style={{padding:5, paddingHorizontal:'12%', justifyContent:'center', alignSelf:'center', borderRadius:8, backgroundColor:THEME.COLORS.BLUE}}>
+        <Text style={THEME.TEXT.T4}>
+          Grade Students
+        </Text>
+      </View>
+     </View>
+        </TouchableOpacity>
+     
+    </LinearGradient>
+    </Animatable.View>
+
+    :
+
+    <Animatable.View style={styles.container} animation={fadeIn}>
+             <LinearGradient style={styles.container}
+    colors={['#042630', '#006f56', THEME.COLORS.GREEN]} 
+
+    start={[0.6, 0.0]}
+     end={[0.6, 0.8]}
+    >
+        <TouchableOpacity style={{justifyContent:"flex-start", alignSelf:'center', alignItems:'center'}}
+        onPress={()=>navigation.navigate('QuizScreen',{quizName: assignmentName})}>
         <View style={{justifyContent:"flex-start", marginTop:15, height:"25%"}}>
     <Text style={[THEME.TEXT.T6,{fontWeight:'bold', letterSpacing:2}]}>{props.assignmentName}</Text>
     </View> 

@@ -13,7 +13,7 @@ import {
 import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
 import { TextInput, Avatar } from "react-native-paper";
-import HomeScreen from "./UserScreens/HomeScreen"
+import HomeScreen from "./UserScreens/hs"
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { NavigationContainer } from '@react-navigation/native'
 import ScreensClasses from '../navigation/ScreensClasses'
@@ -78,9 +78,10 @@ const UserScreen = (props) => {
      <View
         styles={{ flexDirection: "row", justifyContent: "flex-end" }}
         width={width}
-        flex={0.75}
-        justifyContent="center"
-        bottom={15}
+        flex={0.4}
+        justifyContent="flex-start"
+        top={20}
+        
       >
         <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
           Progress This Week

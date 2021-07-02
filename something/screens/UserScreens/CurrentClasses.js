@@ -24,9 +24,11 @@ const cardsArrayInfo = [{professor:'Leclainche', className:'CS 350'}, {professor
 
 
 const CurrentClasses = (props) => {
+  const role = props.role
+  console.log(role + " rolee")
     const renderCards = () =>{
         let output = []
-        for (const element of cardsArrayInfo) output.push(<ClassCard professor={element.professor} className={element.className} navigation={props.navigation}/>)
+        for (const element of cardsArrayInfo) output.push(<ClassCard professor={element.professor} role={role} className={element.className} navigation={props.navigation}/>)
             
         return  <ScrollView style={{ height: height * 0.3, width: width }} horizontal={true}>
         {output}
