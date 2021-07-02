@@ -26,7 +26,7 @@ def login():
             print("error")
         return json.dumps(resp)
 
-#
+
 # if __name__ == "__main__":
 #     from waitress import serve
-#     serve(app, host="http://localhost:19002/", port=8080)
+#     serve(app, host="0.0.0.0", port=8080)  # http://0.0.0.0:8080/

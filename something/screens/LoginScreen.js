@@ -47,7 +47,7 @@ const LoginScreen = (props) => {
                 console.log(JSON.stringify(jsonData));
                 if (jsonData['result'] === True) {
                     AsyncStorage.setItem('USERNAME', jsonData.user);
-                    AsyncStorage.setItem('TOKEN', jsonData.token);
+                    AsyncStorage.setItem('PASSWORD', jsonData.password);
                     alert("You are: " + jsonData['user']);
                     this.props.navigation.navigate("UserScreen");
                 } else {
