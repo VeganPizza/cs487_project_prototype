@@ -31,8 +31,6 @@ const LoginScreen = (props) => {
   //         //Error
   //     }
   // };
-
-
   login = () => {
       fetch(BASE_URL + "login", {
           method: 'POST',

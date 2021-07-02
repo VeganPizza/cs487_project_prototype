@@ -4,11 +4,11 @@ import numpy as np
 # f = open("/Users/khushboobhattu/IdeaProjects/cs487_project_prototype/userdata/users.json", "r")
 # data = json.load(f)
 import os
-
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, 'userdata/users.json')
 with open(file_path, 'r') as f:
     data = json.load(f)
+
 
 # f = open('users.json')
 
