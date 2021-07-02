@@ -30,26 +30,30 @@ def load_data(): # Loads every dataframe from the data folder
   # Load users.json; a blank template is loaded instead if the file does not exist.
   try:
     users = pd.read_json(data_folder + "/users.json")
-  except FileNotFoundError:
+  except:
     users = pd.DataFrame(columns=["username", "password", "isStudent", "isTeacher"]).set_index("username")
+    users.to_json(data_folder + "/users.json")
   
   # Load classes.json; a blank template is loaded instead if the file does not exist.
   try:
     classes = pd.read_json(data_folder + "/classes.json")
-  except FileNotFoundError:
+  except:
     classes = pd.DataFrame(columns=["id", "name", "teachers", "students", "quizzes"]).set_index("id")
+    classes.to_json(data_folder + "/classes.json")
 
   # Load quizzes.json; a blank template is loaded instead if the file does not exist.
   try:
     quizzes = pd.read_json(data_folder + "/quizzes.json")
-  except FileNotFoundError:
+  except:
     quizzes = pd.DataFrame(columns=["id", "name", "questions", "submissions"]).set_index("id")
+    quizzes.to_json(data_folder + "/quizzes.json")
 
   # Load questions.json; a blank template is loaded instead if the file does not exist.
   try:
     questions = pd.read_json(data_folder + "/questions.json")
-  except FileNotFoundError:
+  except:
     questions = pd.DataFrame(columns=["id", "prompt", "answers", "ansIndex"]).set_index("id")
+    questions.to_json(data_folder + "/questions.json")
 
 
 def save_data(): # Saves the state of every dataframe to disc in json form
