@@ -3,6 +3,10 @@ import numpy as np
 import pandas as pd
 
 import os
+
+# I believe code in this area is no longer necessary, but am
+# not sure enough to delete it on my own.
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, 'userdata/users.json')
 with open(file_path, 'r') as f:
@@ -12,49 +16,48 @@ with open(file_path, 'r') as f:
 
 data = np.array(data)
 f.close()
-
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 # Data structure code
-data_folder = "../data"
+data_folder = "/userdata"
 
 
-# TODO: Switch from using .csv files to .json files
 
 def load_data(): # Loads every dataframe from the data folder
   global users, classes, quizzes, questions
 
-  # Load users.csv; a blank template is loaded instead if the file does not exist.
+  # Load users.json; a blank template is loaded instead if the file does not exist.
   try:
-    users = pd.read_csv(data_folder + "/users.csv")
+    users = pd.read_json(data_folder + "/users.json")
   except FileNotFoundError:
     users = pd.DataFrame(columns=["username", "password", "isStudent", "isTeacher"]).set_index("username")
   
-  # Load classes.csv; a blank template is loaded instead if the file does not exist.
+  # Load classes.json; a blank template is loaded instead if the file does not exist.
   try:
-    classes = pd.read_csv(data_folder + "/classes.csv")
+    classes = pd.read_json(data_folder + "/classes.json")
   except FileNotFoundError:
     classes = pd.DataFrame(columns=["id", "name", "teachers", "students", "quizzes"]).set_index("id")
 
-  # Load quizzes.csv; a blank template is loaded instead if the file does not exist.
+  # Load quizzes.json; a blank template is loaded instead if the file does not exist.
   try:
-    quizzes = pd.read_csv(data_folder + "/quizzes.csv")
+    quizzes = pd.read_json(data_folder + "/quizzes.json")
   except FileNotFoundError:
     quizzes = pd.DataFrame(columns=["id", "name", "questions", "submissions"]).set_index("id")
 
-  # Load questions.csv; a blank template is loaded instead if the file does not exist.
+  # Load questions.json; a blank template is loaded instead if the file does not exist.
   try:
-    questions = pd.read_csv(data_folder + "/questions.csv")
+    questions = pd.read_json(data_folder + "/questions.json")
   except FileNotFoundError:
     questions = pd.DataFrame(columns=["id", "prompt", "answers", "ansIndex"]).set_index("id")
 
 
-def save_data(): # Saves the state of every dataframe
+def save_data(): # Saves the state of every dataframe to disc in json form
   global users, classes, quizzes, questions
-  users.to_csv(data_folder + "/users.csv")
-  classes.to_csv(data_folder + "/classes.csv")
-  quizzes.to_csv(data_folder + "/quizzes.csv")
-  questions.to_csv(data_folder + "/questions.csv")
+  users.to_json(data_folder + "/users.json")
+  classes.to_json(data_folder + "/classes.json")
+  quizzes.to_json(data_folder + "/quizzes.json")
+  questions.to_json(data_folder + "/questions.json")
 
 
 # Returns the lowest numerical index for the 
@@ -71,6 +74,7 @@ def next_valid_id(df):
 
 
 #Data accessing/editing functions
+load_data() # Loads the dataset into memory so the accessors will work
 
 
 def add_user(username, password, isStudent, isTeacher):
