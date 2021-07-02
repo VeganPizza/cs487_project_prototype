@@ -14,47 +14,14 @@ data = np.array(data)
 f.close()
 
 
-def look_up_user(usr, psswrd): # TODO: Update this to use the new data structues
-    valid = False
-    for d in data:
-        if d["username"] == usr and d["password"] == psswrd:
-            valid = True
-            return valid
-        else:
-            valid = False
-    return valid
-
-
-def login(usr, psswrd):
-    return look_up_user(usr, psswrd)
-
-
-def edit_username(usr, psswrd, new_usrname): # TODO: Update this to use the new data structures
-    valid = look_up_user(usr, psswrd)
-    if valid:
-        for d in data:
-            if d["username"] == usr and d["password"] == psswrd:
-                d["username"] = new_usrname
-        return True
-    else:
-        return False
-
-
-def edit_password(usr, psswrd, confirm_psswrd, new_psswrd): # TODO: Update this to use the new data structures
-    valid = look_up_user(usr, psswrd)
-    if valid:
-        for d in data:
-            if d["username"] == usr and d["password"] == psswrd and d["password"] == confirm_psswrd:
-                d["psswrd"] = new_psswrd
-        return True
-    else:
-        return False
-
 
 # Data structure code
 data_folder = "../data"
 
-def load_csv(): # Loads every dataframe from the data folder
+
+# TODO: Switch from using .csv files to .json files
+
+def load_data(): # Loads every dataframe from the data folder
   global users, classes, quizzes, questions
 
   # Load users.csv; a blank template is loaded instead if the file does not exist.
@@ -82,7 +49,7 @@ def load_csv(): # Loads every dataframe from the data folder
     questions = pd.DataFrame(columns=["id", "prompt", "answers", "ansIndex"]).set_index("id")
 
 
-def save_csv(): # Saves the state of every dataframe
+def save_data(): # Saves the state of every dataframe
   global users, classes, quizzes, questions
   users.to_csv(data_folder + "/users.csv")
   classes.to_csv(data_folder + "/classes.csv")
@@ -90,101 +57,168 @@ def save_csv(): # Saves the state of every dataframe
   questions.to_csv(data_folder + "/questions.csv")
 
 
+# Returns the lowest numerical index for the 
+# given dataframe that is not yet in use.
+def next_valid_id(df):
+  if df.shape[0] not in df.index.values:
+    return df.shape[0]
+  else:
+    i = 0
+    while 0==0:
+      if i not in df.index.values:
+        return i
+
+
 
 #Data accessing/editing functions
 
-def addUser(username, password, isStudent, isTeacher):
+
+def add_user(username, password, isStudent, isTeacher):
   if username in users.index.values:
-    raise ValueError("Username Already Taken")
+    # raise ValueError("Given username is already taken")
+    return False
   else:
     users.loc[username] = ([password, isStudent, isTeacher]) # Add the user to the users dataframe
-    save_csv()
+    save_data()
+    return True
 
 
-def delUser(username):
-  users.drop(username, inplace=True)
-  save_csv()
+def del_user(username):
+  if username in users.index.values:
+    users.drop(username, inplace=True)
+    save_data()
+    return True
+  else:
+    return False
+    # raise ValueError("Given user does not exist")
 
 
-def addClass(name, teachers, students):
-  id = classes.shape[0]                            # The next available Class ID
+def look_up_user(usr, psswrd):
+  try:
+    return users.loc[usr, "password"] == psswrd
+  except KeyError:
+    return False
+login = look_up_user # Alias
+
+
+def edit_username(usr, psswrd, new_usrname): 
+  if not look_up_user(usr, psswrd):
+    return False
+    # raise ValueError("Given existing username-password combination is invalid")
+  elif new_usrname in users.index.values:
+    return False
+    # raise ValueError("Given target username is taken")
+  else:
+    users.rename(index={usr:new_usrname}, inplace=True)
+    
+    for c in user_classes(usr, teacher=False):
+      class_del_user(usr, c)
+      class_add_user(new_usrname, c)
+    for c in user_classes(usr, teacher=True):
+      class_del_user(usr, c, teacher=True)
+      class_add_user(new_usrname, c, teacher=True)
+
+    save_data()
+    return True
+
+
+def edit_password(usr, psswrd, new_psswrd, confirm_psswrd): 
+  if not look_up_user(usr, psswrd):
+    return False
+    # raise ValueError("Given existing username-password combination is invalid")
+  elif new_psswrd != confirm_psswrd:
+    return False
+    # raise ValueError("Password confirmation failed")
+  else:
+    users.loc[usr, "password"] = new_psswrd
+    save_data()
+    return True
+
+
+# def edit_password(usr, psswrd, new_psswrd, confirm_psswrd) # TODO
+
+
+def add_class(name, teachers=[], students=[]):
+  id = next_valid_id(classes)                      # The next available Class ID
   classes.loc[id] = (name, teachers, students, []) # Add the class to the classes dataframe
-  save_csv()
+  save_data()
+  return True
 
 
-def addQuiz(class_id, name, questions):
-  id = quizzes.shape[0]                       # The next available Quiz ID
+# Returns a list of classes the given user is a student in. If teacher=
+def user_classes(username, teacher=False): 
+  if not teacher:
+    column = "students"
+  else:
+    column = "teachers"
+  
+  return classes.index[classes[column] \
+                       .apply(lambda user_list: username in user_list)] \
+                       .to_list()
+
+
+# Adds a student to the given class. If teacher=True, they're added as a
+# teacher, instead.
+def class_add_user(username, class_id, teacher=False): 
+  if not teacher:
+    column = "students"
+  else:
+    column = "teachers"
+
+  if username not in users.index.values:
+    return False
+    # raise ValueError("User does not exist")
+  if class_id not in classes.index.values:
+    return False
+    # raise ValueError("Class does not exist")
+  user_list = classes.loc[class_id, column]
+  if user_list is None:
+    user_list = []
+  if username in user_list:
+    return False
+    # raise ValueError("Specified user is already in the given class")
+  
+  try:
+    classes.loc[class_id, column].append(username)
+  except AttributeError:
+    classes.loc[class_id, column] = [username]
+  save_data()
+  return True
+
+
+# Removes a student from the given class. If teacher=True, they're removed as a
+# teacher, instead.
+def class_del_user(username, class_id, teacher=False): 
+  if not teacher:
+    column = "students"
+  else:
+    column = "teachers"
+
+  if class_id not in classes.index.values:
+    return False
+    # raise ValueError("Class does not exist")
+  user_list = classes.loc[class_id, column]
+  if user_list is None:
+    user_list = []
+  if username not in user_list:
+    return False
+    # raise ValueError("Specified user not in the given class")
+  
+  classes.loc[class_id, column].remove(username)
+  save_data()
+  return True
+
+
+def add_quiz(class_id, name, questions):
+  id = next_valid_id(quizzes)                 # The next available Quiz ID
   quizzes.loc[id] = (name, questions, [])     # Add the quiz to the quizzes dataframe
   classes.loc[class_id, "quizzes"].append(id) # Add quiz to the given class
-  save_csv()
+  save_data()
+  return True
 
 
-def addQuestion(prompt, answers, ansIndex):
-  id = questions.shape[0]                         # The next available Quiz ID
+def add_question(prompt, answers, ansIndex):
+  id = next_valid_id(questions)                   # The next available Quiz ID
   questions.loc[id] = (prompt, answers, ansIndex) # Add the question to the dataframe
-  save_csv()
-
-
-# Old class structure (To replace, but the database implementation can't replace it just yet, so I'm leaving it so the rest of the code will still run)
-
-class Student:
-    def __init__(self, firstname, lastname, classes, score):
-        self.firstName = firstname
-        self.lastName = lastname
-        self.classes = classes
-        self.score = score
-
-    def getscore(self):
-        return self.score
-
-    def getclasses(self):
-        return self.classes
-
-    class StudentClass:
-        def __init__(self, class_name, quizzes, class_score):
-            self.class_name = class_name
-            self.quizzes = quizzes
-            self.class_score = class_score
-
-        def getclassname(self):
-            return self.class_name
-
-        def getquizzes(self):
-            return self.quizzes
-
-        def getclassscore(self):
-            return self.class_score
-
-
-class Faculty:
-    def __init__(self, firstname, lastname, classes):
-        self.firstName = firstname
-        self.lastName = lastname
-        self.classes = classes
-
-    def getclasses(self):
-        return self.classes
-
-    class FacultyClasses:
-        def __init__(self, class_name, quizzes, completion):
-            self.class_name = class_name
-            self.quizzes = quizzes
-            self.completion = completion
-
-        def getclassname(self):
-            return self.class_name
-
-        def getquizzes(self):
-            return self.quizzes
-
-        def getcompletion(self):
-            return self.completion
-
-
-class Admin:
-    def __init__(self, firstname, lastname):
-        self.firstName = firstname
-        self.lastName = lastname
-
-
-
+  save_data()
+  return True
