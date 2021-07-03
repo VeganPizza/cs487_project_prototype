@@ -64,7 +64,7 @@ const HomeScreen = (props) => {
   }
   const htmlContent = `
     <h1>News !</h1>
-    <news src="announcement.txt" />
+    <div><p text=announcement.txt></p></div>
 `;
   console.log(props);
   console.log(webpage.data);
