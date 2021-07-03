@@ -7,6 +7,7 @@ import AssignmentsScreen from "../screens/UserScreens/AssignmentsScreen";
 import MessagesScreen from "../screens/UserScreens/MessagesScreen";
 import UploadQuiz from "../screens/UserScreens/UploadQuiz"
 import QuizScreen from "../screens/UserScreens/QuizScreen";
+import ManageInstitutions from "../screens/UserScreens/ManageInstitutions";
 
 
 function ScreensHome(props) {
@@ -50,6 +51,14 @@ function ScreensHome(props) {
           options={{ gestureEnabled: false }}
         >
           {(props) => <QuizScreen {...props} role={role} />}
+        </Stack3.Screen>
+
+        <Stack3.Screen
+          name="ManageInstitutions"
+          props={role}
+          options={{ gestureEnabled: false }}
+        >
+          {(props) => <ManageInstitutions {...props} role={role} />}
         </Stack3.Screen>
 
       

@@ -11,7 +11,7 @@ import {
   Image,
   ScrollView,
   useWindowDimensions,
-  TouchableOpacityBase, Alert,
+  TouchableOpacityBase, Alert,Linking
 } from "react-native";
 import THEME from "../../constants/THEME";
 import Header from "../../navigation/Header";
@@ -49,7 +49,7 @@ const HomeScreen = (props) => {
     },
   }
   const htmlContent = `
-    <body class="path-node page-node-type-article navbar-is-fixed-top has-glyphicons"; style="background-color: white">
+    <body class="path-node page-node-type-article navbar-is-fixed-top has-glyphicons"; >
     <p style="background-color:white;">
   <a class="visually-hidden focusable skip-link" href="#main-content">
    Skip to main content</p>
@@ -434,6 +434,9 @@ const HomeScreen = (props) => {
                   width: width * 0.3,
                 },
               ]}
+              onPress={() => {
+                props.navigation.navigate("ManageInstitutions");
+              }}
             >
               <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
                 Manage Institutions
@@ -579,7 +582,9 @@ const HomeScreen = (props) => {
             placeholder="Institutions"
             
           ></TextInput>
-          
+          <View>
+
+          </View>
             </View>
           </>
         ) : (
@@ -623,35 +628,36 @@ const HomeScreen = (props) => {
                         alignSelf: "center",
                         textAlignVertical: "auto",
                         textAlign: "center",
+                      
                       }}
                     >
-                      <HTML source={{ html: htmlContent }} contentWidth={width} />
-                      {/*{" "}*/}
-                      {/*Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
-                      {/*Nam accumsan nulla quis dapibus ultricies. Duis lacinia*/}
-                      {/*feugiat lacus, eleifend blandit sapien consequat et.*/}
-                      {/*Pellentesque in congue risus, auctor suscipit purus. Fusce*/}
-                      {/*pulvinar metus tempor velit lacinia euismod. Integer sit*/}
-                      {/*amet magna ut urna commodo rhoncus. Nullam rutrum elit et*/}
-                      {/*velit scelerisque tempor. Aenean vulputate consequat*/}
-                      {/*facilisis. Fusce pellentesque pretium ligula et semper.*/}
-                      {/*Cras sit amet volutpat sem. Integer malesuada tortor quam,*/}
-                      {/*id convallis tortor consequat in. Vivamus pretium*/}
-                      {/*tincidunt dui ut tincidunt. Donec vitae turpis in dolor*/}
-                      {/*finibus dictum. Donec sed eros at lacus rutrum sodales.*/}
-                      {/*Sed sed aliquet libero. Mauris suscipit est eget purus*/}
-                      {/*consectetur accumsan. Sed vel turpis nec nisi vehicula*/}
-                      {/*sagittis. Nunc interdum lacus at interdum fermentum.*/}
-                      {/*Pellentesque rhoncus suscipit nisi at fermentum. Duis*/}
-                      {/*dictum bibendum metus, et mollis odio tristique feugiat.*/}
-                      {/*Suspendisse euismod sapien lectus, ac congue lectus congue*/}
-                      {/*tincidunt. Integer commodo iaculis sapien in iaculis.*/}
-                      {/*Aliquam id urna ac justo aliquam blandit. Ut erat lorem,*/}
-                      {/*sagittis eu quam eget, scelerisque tristique nunc. Morbi*/}
-                      {/*ornare pharetra auctor. In urna nulla, interdum a maximus*/}
-                      {/*a, facilisis vitae ex. Vestibulum ex lorem, tempor a*/}
-                      {/*placerat et, bibendum vitae ipsum. Nunc malesuada quam*/}
-                      {/*vitae fringilla ullamcorper. Vestibulum dictum velit.*/}
+                      <HTML source={{ html: htmlContent }} 
+                      backgroundColor='transparent' 
+                      containerStyle={{width:width*.7, backgroundColor:'transparent'}}
+                      tagsStyles={{
+                        div: {backgroundColor:'transparent'},
+                        a: {color:THEME.COLORS.GREEN, fontWeight:'bold', textDecorationLine:'transparent'},
+                        body:{backgroundColor:THEME.COLORS.BACKGROUND},
+                        p:{color:'white'},
+                        text:{color:'white'},
+                        h1:{color:'white'},
+                        h2:{color:'white'},
+                        ul:{decoration:'none'},
+                        div:{color:'white'},
+                        ul:{listStyleType:'none'},
+                        li:{listStyleType:'none', marginBottom: 0,
+                        marginLeft: -16,
+                        marginRight: 0,
+                        marginTop: 0,
+                        paddingLeft: 0}
+                    
+                        
+                        
+                      }}
+                      
+                      onLinkPress={(event, href)=>{Linking.openURL(href)}}/>
+                      
+                      
                     </Text>
                     <Image
                       style={{
