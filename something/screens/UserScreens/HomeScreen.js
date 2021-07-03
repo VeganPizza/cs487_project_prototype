@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import HTML from "react-native-render-html";
 import {article_url, _api_key, category, country_code} from './article'
 import {
   StyleSheet,
@@ -18,8 +19,8 @@ import { TextInput, Avatar } from "react-native-paper";
 import * as Progress from "react-native-progress";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
-let announcement;
-announcement = {};
+// let announcement;
+// announcement = {};
 
 export async function getArticles(){
   try {
@@ -61,6 +62,10 @@ const HomeScreen = (props) => {
       underlineColor: "#fff",
     },
   }
+  const htmlContent = `
+    <h1>News !</h1>
+    <news src="announcement.txt" />
+`;
   console.log(props);
   console.log(webpage.data);
   const handleRoleButtons = () => {
@@ -310,131 +315,132 @@ const HomeScreen = (props) => {
               alignSelf="center"
             >
               <ScrollView style={{ height: height * 0.4, width: width }}>
-                <Text style={{ textAlign: "left", flexShrink: 1 }}>
-                  <View
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        width: width * 0.6,
-                        // textAlign: "left",
+                <HTML source={{ html: htmlContent }} contentWidth={width} />
+            {/*    <Text style={{ textAlign: "left", flexShrink: 1 }}>*/}
+            {/*      <View*/}
+            {/*        style={{*/}
+            {/*          width: "100%",*/}
+            {/*          height: "auto",*/}
+            {/*          flexDirection: "row",*/}
+            {/*        }}*/}
+            {/*      >*/}
+            {/*        <Text*/}
+            {/*          style={{*/}
+            {/*            width: width * 0.6,*/}
+            {/*            // textAlign: "left",*/}
 
-                        padding: 15,
-                        flexWrap: "wrap-reverse",
-                        color: "white",
-                        alignSelf: "center",
-                        textAlignVertical: "auto",
-                        textAlign: "center",
-                      }}
-                    >
-                      {/* <object
-                    width="300"
-                    height="300"
-                    type="text/plain"
-                    data="announcement.txt"
-                    border="0"
-                  ></object> */}{" "}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nam accumsan nulla quis dapibus ultricies. Duis lacinia
-                      feugiat lacus, eleifend blandit sapien consequat et.
-                      Pellentesque in congue risus, auctor suscipit purus. Fusce
-                      pulvinar metus tempor velit lacinia euismod. Integer sit
-                      amet magna ut urna commodo rhoncus. Nullam rutrum elit et
-                      velit scelerisque tempor. Aenean vulputate consequat
-                      facilisis. Fusce pellentesque pretium ligula et semper.
-                      Cras sit amet volutpat sem. Integer malesuada tortor quam,
-                      id convallis tortor consequat in. Vivamus pretium
-                      tincidunt dui ut tincidunt. Donec vitae turpis in dolor
-                      finibus dictum. Donec sed eros at lacus rutrum sodales.
-                      Sed sed aliquet libero. Mauris suscipit est eget purus
-                      consectetur accumsan. Sed vel turpis nec nisi vehicula
-                      sagittis. Nunc interdum lacus at interdum fermentum.
-                      Pellentesque rhoncus suscipit nisi at fermentum. Duis
-                      dictum bibendum metus, et mollis odio tristique feugiat.
-                      Suspendisse euismod sapien lectus, ac congue lectus congue
-                      tincidunt. Integer commodo iaculis sapien in iaculis.
-                      Aliquam id urna ac justo aliquam blandit. Ut erat lorem,
-                      sagittis eu quam eget, scelerisque tristique nunc. Morbi
-                      ornare pharetra auctor. In urna nulla, interdum a maximus
-                      a, facilisis vitae ex. Vestibulum ex lorem, tempor a
-                      placerat et, bibendum vitae ipsum. Nunc malesuada quam
-                      vitae fringilla ullamcorper. Vestibulum dictum velit.
-                    </Text>
-                    <Image
-                      style={{
-                        width: 128,
-                        height: 128,
-                        resizeMode: "contain",
-                        marginVertical: 15,
+            {/*            padding: 15,*/}
+            {/*            flexWrap: "wrap-reverse",*/}
+            {/*            color: "white",*/}
+            {/*            alignSelf: "center",*/}
+            {/*            textAlignVertical: "auto",*/}
+            {/*            textAlign: "center",*/}
+            {/*          }}*/}
+            {/*        >*/}
+            {/*          /!* <object*/}
+            {/*        width="300"*/}
+            {/*        height="300"*/}
+            {/*        type="text/plain"*/}
+            {/*        data="announcement.txt"*/}
+            {/*        border="0"*/}
+            {/*      ></object> *!/{" "}*/}
+            {/*          Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
+            {/*          Nam accumsan nulla quis dapibus ultricies. Duis lacinia*/}
+            {/*          feugiat lacus, eleifend blandit sapien consequat et.*/}
+            {/*          Pellentesque in congue risus, auctor suscipit purus. Fusce*/}
+            {/*          pulvinar metus tempor velit lacinia euismod. Integer sit*/}
+            {/*          amet magna ut urna commodo rhoncus. Nullam rutrum elit et*/}
+            {/*          velit scelerisque tempor. Aenean vulputate consequat*/}
+            {/*          facilisis. Fusce pellentesque pretium ligula et semper.*/}
+            {/*          Cras sit amet volutpat sem. Integer malesuada tortor quam,*/}
+            {/*          id convallis tortor consequat in. Vivamus pretium*/}
+            {/*          tincidunt dui ut tincidunt. Donec vitae turpis in dolor*/}
+            {/*          finibus dictum. Donec sed eros at lacus rutrum sodales.*/}
+            {/*          Sed sed aliquet libero. Mauris suscipit est eget purus*/}
+            {/*          consectetur accumsan. Sed vel turpis nec nisi vehicula*/}
+            {/*          sagittis. Nunc interdum lacus at interdum fermentum.*/}
+            {/*          Pellentesque rhoncus suscipit nisi at fermentum. Duis*/}
+            {/*          dictum bibendum metus, et mollis odio tristique feugiat.*/}
+            {/*          Suspendisse euismod sapien lectus, ac congue lectus congue*/}
+            {/*          tincidunt. Integer commodo iaculis sapien in iaculis.*/}
+            {/*          Aliquam id urna ac justo aliquam blandit. Ut erat lorem,*/}
+            {/*          sagittis eu quam eget, scelerisque tristique nunc. Morbi*/}
+            {/*          ornare pharetra auctor. In urna nulla, interdum a maximus*/}
+            {/*          a, facilisis vitae ex. Vestibulum ex lorem, tempor a*/}
+            {/*          placerat et, bibendum vitae ipsum. Nunc malesuada quam*/}
+            {/*          vitae fringilla ullamcorper. Vestibulum dictum velit.*/}
+            {/*        </Text>*/}
+            {/*        <Image*/}
+            {/*          style={{*/}
+            {/*            width: 128,*/}
+            {/*            height: 128,*/}
+            {/*            resizeMode: "contain",*/}
+            {/*            marginVertical: 15,*/}
 
-                        flexWrap: "wrap",
-                        top: 75,
-                      }}
-                      source={require("./../../images/Logo.png")}
-                    ></Image>
-                  </View>
+            {/*            flexWrap: "wrap",*/}
+            {/*            top: 75,*/}
+            {/*          }}*/}
+            {/*          source={require("./../../images/Logo.png")}*/}
+            {/*        ></Image>*/}
+            {/*      </View>*/}
 
-                  {/* <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  width: width * 0.75,
-                  bottom: 20,
-                  flexWrap: "wrap",
-                }}
-              >
-                <Image
-                  source={require("./../../images/Logo.png")}
-                  style={{
-                    width: 128,
-                    height: 128,
-                    left: 15,
-                    marginVertical: 15,
-                  }}
-                ></Image>
+            {/*      /!* <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>*/}
+            {/*  <View*/}
+            {/*    style={{*/}
+            {/*      flex: 1,*/}
+            {/*      flexDirection: "row",*/}
+            {/*      width: width * 0.75,*/}
+            {/*      bottom: 20,*/}
+            {/*      flexWrap: "wrap",*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    <Image*/}
+            {/*      source={require("./../../images/Logo.png")}*/}
+            {/*      style={{*/}
+            {/*        width: 128,*/}
+            {/*        height: 128,*/}
+            {/*        left: 15,*/}
+            {/*        marginVertical: 15,*/}
+            {/*      }}*/}
+            {/*    ></Image>*/}
 
-                <Text
-                  style={{
-                    bottom: 20,
-                    flexShrink: 1,
-                    minWidth: 100,
-                    marginHorizontal: 10,
-                    color: "white",
-                  }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                  accumsan nulla quis dapibus ultricies. Duis lacinia feugiat
-                  lacus, eleifend blandit sapien consequat et. Pellentesque in
-                  congue risus, auctor suscipit purus. Fusce pulvinar metus
-                  tempor velit lacinia euismod. Integer sit amet magna ut urna
-                  commodo rhoncus. Nullam rutrum elit et velit scelerisque
-                  tempor. Aenean vulputate consequat facilisis. Fusce
-                  pellentesque pretium ligula et semper. Cras sit amet volutpat
-                  sem. Integer malesuada tortor quam, id convallis tortor
-                  consequat in. Vivamus pretium tincidunt dui ut tincidunt.
-                  Donec vitae turpis in dolor finibus dictum. Donec sed eros at
-                  lacus rutrum sodales. Sed sed aliquet libero. Mauris suscipit
-                  est eget purus consectetur accumsan. Sed vel turpis nec nisi
-                  vehicula sagittis. Nunc interdum lacus at interdum fermentum.
-                  Pellentesque rhoncus suscipit nisi at fermentum. Duis dictum
-                  bibendum metus, et mollis odio tristique feugiat. Suspendisse
-                  euismod sapien lectus, ac congue lectus congue tincidunt.
-                  Integer commodo iaculis sapien in iaculis. Aliquam id urna ac
-                  justo aliquam blandit. Ut erat lorem, sagittis eu quam eget,
-                  scelerisque tristique nunc. Morbi ornare pharetra auctor. In
-                  urna nulla, interdum a maximus a, facilisis vitae ex.
-                  Vestibulum ex lorem, tempor a placerat et, bibendum vitae
-                  ipsum. Nunc malesuada quam vitae fringilla ullamcorper.
-                  Vestibulum dictum velit.
-                </Text>
-              </View>
-            </ScrollView> */}
-                </Text>
+            {/*    <Text*/}
+            {/*      style={{*/}
+            {/*        bottom: 20,*/}
+            {/*        flexShrink: 1,*/}
+            {/*        minWidth: 100,*/}
+            {/*        marginHorizontal: 10,*/}
+            {/*        color: "white",*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam*/}
+            {/*      accumsan nulla quis dapibus ultricies. Duis lacinia feugiat*/}
+            {/*      lacus, eleifend blandit sapien consequat et. Pellentesque in*/}
+            {/*      congue risus, auctor suscipit purus. Fusce pulvinar metus*/}
+            {/*      tempor velit lacinia euismod. Integer sit amet magna ut urna*/}
+            {/*      commodo rhoncus. Nullam rutrum elit et velit scelerisque*/}
+            {/*      tempor. Aenean vulputate consequat facilisis. Fusce*/}
+            {/*      pellentesque pretium ligula et semper. Cras sit amet volutpat*/}
+            {/*      sem. Integer malesuada tortor quam, id convallis tortor*/}
+            {/*      consequat in. Vivamus pretium tincidunt dui ut tincidunt.*/}
+            {/*      Donec vitae turpis in dolor finibus dictum. Donec sed eros at*/}
+            {/*      lacus rutrum sodales. Sed sed aliquet libero. Mauris suscipit*/}
+            {/*      est eget purus consectetur accumsan. Sed vel turpis nec nisi*/}
+            {/*      vehicula sagittis. Nunc interdum lacus at interdum fermentum.*/}
+            {/*      Pellentesque rhoncus suscipit nisi at fermentum. Duis dictum*/}
+            {/*      bibendum metus, et mollis odio tristique feugiat. Suspendisse*/}
+            {/*      euismod sapien lectus, ac congue lectus congue tincidunt.*/}
+            {/*      Integer commodo iaculis sapien in iaculis. Aliquam id urna ac*/}
+            {/*      justo aliquam blandit. Ut erat lorem, sagittis eu quam eget,*/}
+            {/*      scelerisque tristique nunc. Morbi ornare pharetra auctor. In*/}
+            {/*      urna nulla, interdum a maximus a, facilisis vitae ex.*/}
+            {/*      Vestibulum ex lorem, tempor a placerat et, bibendum vitae*/}
+            {/*      ipsum. Nunc malesuada quam vitae fringilla ullamcorper.*/}
+            {/*      Vestibulum dictum velit.*/}
+            {/*    </Text>*/}
+            {/*  </View>*/}
+            {/*</ScrollView> *!/*/}
+            {/*    </Text>*/}
               </ScrollView>
             </View>
           </>
