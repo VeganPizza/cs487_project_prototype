@@ -13,7 +13,7 @@ import {
 import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
 import { TextInput, Avatar } from "react-native-paper";
-import HomeScreen from "./UserScreens/hs"
+import HomeScreen from "./UserScreens/HomeScreen"
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { NavigationContainer } from '@react-navigation/native'
 import ScreensClasses from '../navigation/ScreensClasses'

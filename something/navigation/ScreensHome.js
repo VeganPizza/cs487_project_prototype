@@ -1,12 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { SafeAreaView, Settings } from "react-native";
-import HomeScreen from "../screens/UserScreens/hs";
+import HomeScreen from "../screens/UserScreens/HomeScreen";
 import SettingsScreen from "../screens/UserScreens/SettingsScreen";
 import AssignmentsScreen from "../screens/UserScreens/AssignmentsScreen";
 import MessagesScreen from "../screens/UserScreens/MessagesScreen";
 import UploadQuiz from "../screens/UserScreens/UploadQuiz"
 import QuizScreen from "../screens/UserScreens/QuizScreen";
+
 
 function ScreensHome(props) {
   const Stack3 = createStackNavigator();

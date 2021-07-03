@@ -8,22 +8,57 @@ import {
     Dimensions,
     Image,
     ScrollView,
+    Alert
     // AsyncStorage,
 } from "react-native";
 import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
 import {  TextInput, Avatar } from "react-native-paper";
 import {BASE_URL} from "./host";
-import { login } from 'C:\Users\Bhattu\IdeaProjects\cs487_project_prototype\src\app.py';
+// import { login } from 'C:\Users\Bhattu\IdeaProjects\cs487_project_prototype\src\app.py';
 
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 let state = "global";
 const LoginScreen = (props) => {
   const [typing, setTyping] = useState(false);
+  const [currentUsername, setCurrentUsername] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
+  const users =[ {user:'victor', password:'12345', role:'student'},  {user:'khushboo', password:'12345', role:'faculty'}, {user:'undeemiss', password:'12345', role:'TA'}, {user:'admin', password:'12345', role:'admin'},]
   state = {
       username: '',
       password: ''
+  }
+
+  const handleLogin= () =>{
+    if (currentUsername === '' || currentPassword === '')  alert('Add a username and Password')
+
+    else {
+      for (let user of users) if (user.password === currentPassword && user.user === currentUsername) handleRouting(user)
+    }
+    
+  }
+
+
+  const handleRouting = (user) => {
+    if (user.role === 'student') props.navigation.navigate('UserScreen')
+    else if (user.role === 'faculty') props.navigation.navigate('FacultyScreen')
+    else if (user.role === 'TA') {
+      Alert.alert(
+        "Multiple Roles Associated to the Account",
+        "Select a Role",
+        [
+          {
+            text: "Student",
+            onPress: () => props.navigation.navigate('UserScreen'),
+          
+          },
+          { text: "Faculty", onPress: () => props.navigation.navigate('FacultyScreen') }
+        ]
+      );
+      }
+    
+    else props.navigation.navigate('AdminScreen')
   }
   // _store = async () = {
   //     try {
@@ -32,31 +67,34 @@ const LoginScreen = (props) => {
   //         //Error
   //     }
   // };
-    login = () => {
-        fetch(BASE_URL + "login", {
-            method: 'POST',
-            body: JSON.stringify({
-                email: this.state.username,
-                password: this.state.password
-            })
-        })
-            .then((resp) => {
-                return resp.json();
-            })
-            .then((jsonData) => {
-                console.log(JSON.stringify(jsonData));
-                if (jsonData['result'] === True) {
-                    AsyncStorage.setItem('USERNAME', jsonData.user);
-                    AsyncStorage.setItem('PASSWORD', jsonData.password);
-                    alert("You are: " + jsonData['user']);
-                    this.props.navigation.navigate("UserScreen");
-                } else {
-                    alert("Incorrect username or password. Please, Try again");
-                }
-            }).catch((e) => {
-            console.log(e)
-        })
-    }
+//   async function login(username, password) {
+//     const response = await zlFetch.post()
+// }
+//     login = () => {
+//         fetch(BASE_URL + "login", {
+//             method: 'POST',
+//             body: JSON.stringify({
+//                 email: this.state.username,
+//                 password: this.state.password
+//             })
+//         })
+//             .then((resp) => {
+//                 return resp.json();
+//             })
+//             .then((jsonData) => {
+//                 console.log(JSON.stringify(jsonData));
+//                 if (jsonData['result'] === True) {
+//                     AsyncStorage.setItem('USERNAME', jsonData.user);
+//                     AsyncStorage.setItem('PASSWORD', jsonData.password);
+//                     alert("You are: " + jsonData['user']);
+//                     this.props.navigation.navigate("UserScreen");
+//                 } else {
+//                     alert("Incorrect username or password. Please, Try again");
+//                 }
+//             }).catch((e) => {
+//             console.log(e)
+//         })
+//     }
   return (
     <View style={styles.container}>
       <Header navigation={props.navigation} title={"Login"} />
@@ -125,6 +163,7 @@ const LoginScreen = (props) => {
                   
                 },
               }}
+              onChangeText={(e)=>setCurrentUsername(e)}
               onFocus={() => setTyping(true)}
               onBlur={() => setTyping(false)}
             ></TextInput>
@@ -150,6 +189,7 @@ const LoginScreen = (props) => {
                   primary: THEME.COLORS.GREEN,
                 },
               }}
+              onChangeText={(e)=>setCurrentPassword(e)}
               onFocus={() => setTyping(true)}
               onBlur={() => setTyping(false)}
             ></TextInput>
@@ -167,7 +207,7 @@ const LoginScreen = (props) => {
            alignSelf:'center',
           }}
         >
-          <TouchableOpacity style={[THEME.BUTTON.LOGIN,]} onPress={()=>props.navigation.navigate("UserScreen")}>
+          <TouchableOpacity style={[THEME.BUTTON.LOGIN,]} onPress={()=>handleLogin()}>
             <Text style={THEME.TEXT.T7}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -189,7 +229,5 @@ const styles = StyleSheet.create({
 
 export default LoginScreen;
 
-async function login(username, password) {
-    const response = await zlFetch.post()
-}
+
 

@@ -5,6 +5,7 @@ import SampleScreen from "../screens/SampleScreen";
 import LoginScreen from "../screens/LoginScreen";
 import UserScreen from "../screens/UserScreen";
 import FacultyScreen from "../screens/FacultyScreen";
+import AdminScreen from "../screens/AdminScreen"
 
 function Screens(props) {
     const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ function Screens(props) {
         <Stack.Screen name="Login" component={LoginScreen} options={{gestureEnabled:false}}/>
         <Stack.Screen name="UserScreen" component={UserScreen}  options={{gestureEnabled:false}}></Stack.Screen>
         <Stack.Screen name="FacultyScreen" component={FacultyScreen}  options={{gestureEnabled:false}}></Stack.Screen>
+        <Stack.Screen name="AdminScreen" component={AdminScreen}  options={{gestureEnabled:false}}></Stack.Screen>
         
       </Stack.Navigator>
     </SafeAreaView>

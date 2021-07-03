@@ -17,127 +17,335 @@ import { TextInput, Avatar } from "react-native-paper";
 import * as Progress from "react-native-progress";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
-
-
 let announcement;
 announcement = {};
 
-
 const HomeScreen = (props) => {
+  const inputTheme = {
+    colors: {
+      placeholder: 'gray',
+      text: "white",
+      primary: THEME.COLORS.GREEEN,
+      underlineColor: "#fff",
+    },
+  }
+  console.log(props);
+  const handleRoleButtons = () => {
+    if (props.role === "faculty")
+      return (
+        <View style={{ flexDirection: "column", width: "100%" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
+            <TouchableOpacity
+              style={styles.homeButton}
+              onPress={() => props.navigation.navigate("AssignmentsScreen")}
+            >
+              <Text style={THEME.TEXT.T5}>Quiz Data</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.homeButton}
+              onPress={() => {
+                props.navigation.navigate("MessagesScreen");
+              }}
+            >
+              <Text style={THEME.TEXT.T5}>Messages</Text>
+              <Avatar.Icon
+                size={25}
+                backgroundColor="transparent"
+                icon="android-messages"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
+            <TouchableOpacity
+              style={[styles.homeButton, { padding: 0 }]}
+              onPress={() => {
+                props.navigation.navigate("SettingsScreen");
+              }}
+            >
+              <Avatar.Icon
+                icon="cog-outline"
+                size={32}
+                backgroundColor="transparent"
+                style={{ alignSelf: "center" }}
+              ></Avatar.Icon>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.quizButton, { padding: 0 }]}
+              onPress={() => {
+                props.navigation.navigate("UploadQuiz");
+              }}
+            >
+              <Text style={THEME.TEXT.T5}>Upload Quiz</Text>
+              <Avatar.Icon
+                size={25}
+                backgroundColor="transparent"
+                icon="upload"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    else if (props.role === "admin")
+      return (
+        <View style={{ flexDirection: "column", width: "100%" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.homeButton,
+                {
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  width: width * 0.3,
+                },
+              ]}
+            >
+              <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
+                Manage Institutions
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.homeButton,
+                {
+                  paddingHorizontal: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  width: width * 0.3,
+                },
+              ]}
+              onPress={() => {
+                props.navigation.navigate("MessagesScreen");
+              }}
+            >
+              <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
+                Messages
+              </Text>
+              <Avatar.Icon
+                size={25}
+                backgroundColor="transparent"
+                icon="android-messages"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.homeButton,
+                {
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  width: width * 0.3,
+                  backgroundColor: THEME.COLORS.GREEN,
+                },
+              ]}
+            >
+              <Text style={[THEME.TEXT.T5, { textAlign: "center" }]}>
+                Manage Accounts
+              </Text>
+            </TouchableOpacity>
+            <View
+              style={{ marginHorizontal: 5, padding: 7.5, width: width * 0.3 }}
+            ></View>
+          </View>
+        </View>
+      );
+    else
+      return (
+        <View style={{ flexDirection: "column", width: "100%" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
+            <TouchableOpacity
+              style={styles.homeButton}
+              onPress={() => props.navigation.navigate("AssignmentsScreen")}
+            >
+              <Text style={THEME.TEXT.T5}>Assignments</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.homeButton}
+              onPress={() => {
+                props.navigation.navigate("MessagesScreen");
+              }}
+            >
+              <Text style={THEME.TEXT.T5}>Messages</Text>
+              <Avatar.Icon
+                size={25}
+                backgroundColor="transparent"
+                icon="android-messages"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
+            <TouchableOpacity
+              style={[styles.homeButton, { padding: 0 }]}
+              onPress={() => {
+                props.navigation.navigate("SettingsScreen");
+              }}
+            >
+              <Avatar.Icon
+                icon="cog-outline"
+                size={32}
+                backgroundColor="transparent"
+                style={{ alignSelf: "center" }}
+              ></Avatar.Icon>
+            </TouchableOpacity>
+            <View
+              style={{ marginHorizontal: 5, padding: 7.5, width: width * 0.3 }}
+            ></View>
+          </View>
+        </View>
+      );
+  };
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: "column", width: "100%" }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-          <TouchableOpacity style={styles.homeButton} onPress={()=>props.navigation.navigate("AssignmentsScreen")}>
-            <Text style={THEME.TEXT.T5}>Assignments</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.homeButton} onPress={()=>{props.navigation.navigate('MessagesScreen')}}>
-            <Text style={THEME.TEXT.T5}>Messages</Text>
-            <Avatar.Icon
-              size={25}
-              backgroundColor="transparent"
-              icon="android-messages"
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-          <TouchableOpacity style={[styles.homeButton, { padding: 0 }]} onPress={()=>{props.navigation.navigate('SettingsScreen')}}>
-            <Avatar.Icon
-              icon="cog-outline"
-              size={32}
-              backgroundColor="transparent"
-              style={{ alignSelf: "center" }}
-            ></Avatar.Icon>
-          </TouchableOpacity>
-          <View
-            style={{ marginHorizontal: 5, padding: 7.5, width: width * 0.3 }}
-          ></View>
-        </View>
-      </View>
+      {handleRoleButtons()}
 
       <View
         styles={{ flexDirection: "row", marginTop: 20 }}
         width={width}
         height={height * 0.45}
       >
-        <View
-          style={{ flexDirection: "row", alignItems: "flex-start", margin: 20 }}
-        >
-          <Text style={THEME.TEXT.T8}>Announcements</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "flex-start",
-            marginTop: 10,
-          }}
-          width={width}
-          alignSelf="center"
-        >
-          <ScrollView style={{ height: height * 0.4, width: width }}>
-            <Text style={{ textAlign: "left", flexShrink: 1}}>
-              <View
-                style={{ width: "100%", height: "auto", flexDirection: "row" }}
-              >
-                <Text
-                  style={{
-                    width: width * 0.6,
-                    // textAlign: "left",
+        {props.role === "admin" ? (
+          <>
+            
+            <View style={{width:width*.8, flex:1, alignItems:"flex-start", justifyContent:"center", alignSelf:'center', marginTop:30, flexDirection:"row"}} >
+            <Avatar.Icon style={{backgroundColor:'transparent', top:20, borderWidth:1, borderColor:'white', marginHorizontal:15}} icon='magnify' color={THEME.COLORS.GREEN} size={40}></Avatar.Icon>
+            <TextInput
+            style={{
+              width: width * 0.6,
+              height: 45,
+  
+              backgroundColor:"transparent",
+              color:"white",
+              borderColor:'white',
+              borderWidth:1, 
+              borderRadius: 10,
+              top:20,
+              borderTopLeftRadius:10,
+              borderTopRightRadius:10
 
-                    padding: 15,
-                    flexWrap: "wrap-reverse",
-                    color: "white",
-                    alignSelf:'center',
-                    textAlignVertical:'auto',
-                    textAlign:'center'
-                  }}
-                >
-                    <object width="300" height="300" type="text/plain" data="announcement.txt" border="0" >
-                    </object>
+            
+            }}
+            theme={inputTheme}
+            fontColor='white'
+            placeholderTextColor='white'
+            color="white"
+            placeholder="Institutions"
+            
+          ></TextInput>
+          
+            </View>
+          </>
+        ) : (
+          <>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-start",
+                margin: 20,
+              }}
+            >
+              <Text style={THEME.TEXT.T8}>Announcements</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-start",
+                marginTop: 10,
+              }}
+              width={width}
+              alignSelf="center"
+            >
+              <ScrollView style={{ height: height * 0.4, width: width }}>
+                <Text style={{ textAlign: "left", flexShrink: 1 }}>
+                  <View
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        width: width * 0.6,
+                        textAlign: "left",
 
+                        padding: 15,
+                        flexWrap: "wrap-reverse",
+                        color: "white",
+                        alignSelf: "center",
+                        textAlignVertical: "auto",
+                        textAlign: "center",
+                      }}
+                    >
+                      {/* <object
+                    width="300"
+                    height="300"
+                    type="text/plain"
+                    data="announcement.txt"
+                    border="0"
+                  ></object> */}{" "}
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Nam accumsan nulla quis dapibus ultricies. Duis lacinia
+                      feugiat lacus, eleifend blandit sapien consequat et.
+                      Pellentesque in congue risus, auctor suscipit purus. Fusce
+                      pulvinar metus tempor velit lacinia euismod. Integer sit
+                      amet magna ut urna commodo rhoncus. Nullam rutrum elit et
+                      velit scelerisque tempor. Aenean vulputate consequat
+                      facilisis. Fusce pellentesque pretium ligula et semper.
+                      Cras sit amet volutpat sem. Integer malesuada tortor quam,
+                      id convallis tortor consequat in. Vivamus pretium
+                      tincidunt dui ut tincidunt. Donec vitae turpis in dolor
+                      finibus dictum. Donec sed eros at lacus rutrum sodales.
+                      Sed sed aliquet libero. Mauris suscipit est eget purus
+                      consectetur accumsan. Sed vel turpis nec nisi vehicula
+                      sagittis. Nunc interdum lacus at interdum fermentum.
+                      Pellentesque rhoncus suscipit nisi at fermentum. Duis
+                      dictum bibendum metus, et mollis odio tristique feugiat.
+                      Suspendisse euismod sapien lectus, ac congue lectus congue
+                      tincidunt. Integer commodo iaculis sapien in iaculis.
+                      Aliquam id urna ac justo aliquam blandit. Ut erat lorem,
+                      sagittis eu quam eget, scelerisque tristique nunc. Morbi
+                      ornare pharetra auctor. In urna nulla, interdum a maximus
+                      a, facilisis vitae ex. Vestibulum ex lorem, tempor a
+                      placerat et, bibendum vitae ipsum. Nunc malesuada quam
+                      vitae fringilla ullamcorper. Vestibulum dictum velit.
+                    </Text>
+                    <Image
+                      style={{
+                        width: 128,
+                        height: 128,
+                        resizeMode: "contain",
+                        marginVertical: 15,
 
-                  {/*{" "}*/}
-                  {/*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam*/}
-                  {/*accumsan nulla quis dapibus ultricies. Duis lacinia feugiat*/}
-                  {/*lacus, eleifend blandit sapien consequat et. Pellentesque in*/}
-                  {/*congue risus, auctor suscipit purus. Fusce pulvinar metus*/}
-                  {/*tempor velit lacinia euismod. Integer sit amet magna ut urna*/}
-                  {/*commodo rhoncus. Nullam rutrum elit et velit scelerisque*/}
-                  {/*tempor. Aenean vulputate consequat facilisis. Fusce*/}
-                  {/*pellentesque pretium ligula et semper. Cras sit amet volutpat*/}
-                  {/*sem. Integer malesuada tortor quam, id convallis tortor*/}
-                  {/*consequat in. Vivamus pretium tincidunt dui ut tincidunt.*/}
-                  {/*Donec vitae turpis in dolor finibus dictum. Donec sed eros at*/}
-                  {/*lacus rutrum sodales. Sed sed aliquet libero. Mauris suscipit*/}
-                  {/*est eget purus consectetur accumsan. Sed vel turpis nec nisi*/}
-                  {/*vehicula sagittis. Nunc interdum lacus at interdum fermentum.*/}
-                  {/*Pellentesque rhoncus suscipit nisi at fermentum. Duis dictum*/}
-                  {/*bibendum metus, et mollis odio tristique feugiat. Suspendisse*/}
-                  {/*euismod sapien lectus, ac congue lectus congue tincidunt.*/}
-                  {/*Integer commodo iaculis sapien in iaculis. Aliquam id urna ac*/}
-                  {/*justo aliquam blandit. Ut erat lorem, sagittis eu quam eget,*/}
-                  {/*scelerisque tristique nunc. Morbi ornare pharetra auctor. In*/}
-                  {/*urna nulla, interdum a maximus a, facilisis vitae ex.*/}
-                  {/*Vestibulum ex lorem, tempor a placerat et, bibendum vitae*/}
-                  {/*ipsum. Nunc malesuada quam vitae fringilla ullamcorper.*/}
-                  {/*Vestibulum dictum velit.*/}
-                </Text>
-                <Image
-                  style={{
-                    width: 128,
-                    height: 128,
-                    resizeMode:'contain',
-                    marginVertical: 15,
+                        flexWrap: "wrap",
+                        top: 75,
+                      }}
+                      source={require("./../../images/Logo.png")}
+                    ></Image>
+                  </View>
 
-                    flexWrap: "wrap",top:75
-                  }}
-                  source={require("./../../images/Logo.png")}
-                ></Image>
-              </View>
-
-              {/* <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>
+                  {/* <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>
               <View
                 style={{
                   flex: 1,
@@ -193,11 +401,12 @@ const HomeScreen = (props) => {
                 </Text>
               </View>
             </ScrollView> */}
-            </Text>
-          </ScrollView>
-        </View>
+                </Text>
+              </ScrollView>
+            </View>
+          </>
+        )}
       </View>
-     
     </View>
   );
 };
@@ -212,6 +421,18 @@ const styles = StyleSheet.create({
 
   homeButton: {
     backgroundColor: THEME.COLORS.BLUE,
+    marginHorizontal: 5,
+    marginVertical: "2.5%",
+    width: width * 0.3,
+    padding: 5,
+    borderRadius: 8,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+
+  quizButton: {
+    backgroundColor: THEME.COLORS.GREEN,
     marginHorizontal: 5,
     marginVertical: "2.5%",
     width: width * 0.3,
