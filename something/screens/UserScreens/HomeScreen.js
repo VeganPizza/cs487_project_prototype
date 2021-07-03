@@ -64,7 +64,7 @@ const HomeScreen = (props) => {
   }
   const htmlContent = `
     <h1>News !</h1>
-    <news src="announcement.txt" />
+    <a href="announcement.txt">text file</a>
 `;
   console.log(props);
   console.log(webpage.data);
@@ -315,74 +315,69 @@ const HomeScreen = (props) => {
               alignSelf="center"
             >
               <ScrollView style={{ height: height * 0.4, width: width }}>
-                <HTML source={{ html: htmlContent }} contentWidth={width} />
-            {/*    <Text style={{ textAlign: "left", flexShrink: 1 }}>*/}
-            {/*      <View*/}
-            {/*        style={{*/}
-            {/*          width: "100%",*/}
-            {/*          height: "auto",*/}
-            {/*          flexDirection: "row",*/}
-            {/*        }}*/}
-            {/*      >*/}
-            {/*        <Text*/}
-            {/*          style={{*/}
-            {/*            width: width * 0.6,*/}
-            {/*            // textAlign: "left",*/}
 
-            {/*            padding: 15,*/}
-            {/*            flexWrap: "wrap-reverse",*/}
-            {/*            color: "white",*/}
-            {/*            alignSelf: "center",*/}
-            {/*            textAlignVertical: "auto",*/}
-            {/*            textAlign: "center",*/}
-            {/*          }}*/}
-            {/*        >*/}
-            {/*          /!* <object*/}
-            {/*        width="300"*/}
-            {/*        height="300"*/}
-            {/*        type="text/plain"*/}
-            {/*        data="announcement.txt"*/}
-            {/*        border="0"*/}
-            {/*      ></object> *!/{" "}*/}
-            {/*          Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
-            {/*          Nam accumsan nulla quis dapibus ultricies. Duis lacinia*/}
-            {/*          feugiat lacus, eleifend blandit sapien consequat et.*/}
-            {/*          Pellentesque in congue risus, auctor suscipit purus. Fusce*/}
-            {/*          pulvinar metus tempor velit lacinia euismod. Integer sit*/}
-            {/*          amet magna ut urna commodo rhoncus. Nullam rutrum elit et*/}
-            {/*          velit scelerisque tempor. Aenean vulputate consequat*/}
-            {/*          facilisis. Fusce pellentesque pretium ligula et semper.*/}
-            {/*          Cras sit amet volutpat sem. Integer malesuada tortor quam,*/}
-            {/*          id convallis tortor consequat in. Vivamus pretium*/}
-            {/*          tincidunt dui ut tincidunt. Donec vitae turpis in dolor*/}
-            {/*          finibus dictum. Donec sed eros at lacus rutrum sodales.*/}
-            {/*          Sed sed aliquet libero. Mauris suscipit est eget purus*/}
-            {/*          consectetur accumsan. Sed vel turpis nec nisi vehicula*/}
-            {/*          sagittis. Nunc interdum lacus at interdum fermentum.*/}
-            {/*          Pellentesque rhoncus suscipit nisi at fermentum. Duis*/}
-            {/*          dictum bibendum metus, et mollis odio tristique feugiat.*/}
-            {/*          Suspendisse euismod sapien lectus, ac congue lectus congue*/}
-            {/*          tincidunt. Integer commodo iaculis sapien in iaculis.*/}
-            {/*          Aliquam id urna ac justo aliquam blandit. Ut erat lorem,*/}
-            {/*          sagittis eu quam eget, scelerisque tristique nunc. Morbi*/}
-            {/*          ornare pharetra auctor. In urna nulla, interdum a maximus*/}
-            {/*          a, facilisis vitae ex. Vestibulum ex lorem, tempor a*/}
-            {/*          placerat et, bibendum vitae ipsum. Nunc malesuada quam*/}
-            {/*          vitae fringilla ullamcorper. Vestibulum dictum velit.*/}
-            {/*        </Text>*/}
-            {/*        <Image*/}
-            {/*          style={{*/}
-            {/*            width: 128,*/}
-            {/*            height: 128,*/}
-            {/*            resizeMode: "contain",*/}
-            {/*            marginVertical: 15,*/}
+                <Text style={{ textAlign: "left", flexShrink: 1 }}>
+                  <View
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        width: width * 0.6,
+                        // textAlign: "left",
 
-            {/*            flexWrap: "wrap",*/}
-            {/*            top: 75,*/}
-            {/*          }}*/}
-            {/*          source={require("./../../images/Logo.png")}*/}
-            {/*        ></Image>*/}
-            {/*      </View>*/}
+                        padding: 15,
+                        flexWrap: "wrap-reverse",
+                        color: "white",
+                        alignSelf: "center",
+                        textAlignVertical: "auto",
+                        textAlign: "center",
+                      }}
+                    >
+                      <HTML source={{ html: htmlContent }} contentWidth={width} />
+                      {/*{" "}*/}
+                      {/*Lorem ipsum dolor sit amet, consectetur adipiscing elit.*/}
+                      {/*Nam accumsan nulla quis dapibus ultricies. Duis lacinia*/}
+                      {/*feugiat lacus, eleifend blandit sapien consequat et.*/}
+                      {/*Pellentesque in congue risus, auctor suscipit purus. Fusce*/}
+                      {/*pulvinar metus tempor velit lacinia euismod. Integer sit*/}
+                      {/*amet magna ut urna commodo rhoncus. Nullam rutrum elit et*/}
+                      {/*velit scelerisque tempor. Aenean vulputate consequat*/}
+                      {/*facilisis. Fusce pellentesque pretium ligula et semper.*/}
+                      {/*Cras sit amet volutpat sem. Integer malesuada tortor quam,*/}
+                      {/*id convallis tortor consequat in. Vivamus pretium*/}
+                      {/*tincidunt dui ut tincidunt. Donec vitae turpis in dolor*/}
+                      {/*finibus dictum. Donec sed eros at lacus rutrum sodales.*/}
+                      {/*Sed sed aliquet libero. Mauris suscipit est eget purus*/}
+                      {/*consectetur accumsan. Sed vel turpis nec nisi vehicula*/}
+                      {/*sagittis. Nunc interdum lacus at interdum fermentum.*/}
+                      {/*Pellentesque rhoncus suscipit nisi at fermentum. Duis*/}
+                      {/*dictum bibendum metus, et mollis odio tristique feugiat.*/}
+                      {/*Suspendisse euismod sapien lectus, ac congue lectus congue*/}
+                      {/*tincidunt. Integer commodo iaculis sapien in iaculis.*/}
+                      {/*Aliquam id urna ac justo aliquam blandit. Ut erat lorem,*/}
+                      {/*sagittis eu quam eget, scelerisque tristique nunc. Morbi*/}
+                      {/*ornare pharetra auctor. In urna nulla, interdum a maximus*/}
+                      {/*a, facilisis vitae ex. Vestibulum ex lorem, tempor a*/}
+                      {/*placerat et, bibendum vitae ipsum. Nunc malesuada quam*/}
+                      {/*vitae fringilla ullamcorper. Vestibulum dictum velit.*/}
+                    </Text>
+                    <Image
+                      style={{
+                        width: 128,
+                        height: 128,
+                        resizeMode: "contain",
+                        marginVertical: 15,
+
+                        flexWrap: "wrap",
+                        top: 75,
+                      }}
+                      source={require("./../../images/Logo.png")}
+                    ></Image>
+                  </View>
 
             {/*      /!* <ScrollView style={{ height: height * 0.4, marginBottom: 15 }}>*/}
             {/*  <View*/}
@@ -440,7 +435,7 @@ const HomeScreen = (props) => {
             {/*    </Text>*/}
             {/*  </View>*/}
             {/*</ScrollView> *!/*/}
-            {/*    </Text>*/}
+                </Text>
               </ScrollView>
             </View>
           </>
