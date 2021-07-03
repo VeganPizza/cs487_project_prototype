@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import {article_url, _api_key, category, country_code} from './article'
 import {
   StyleSheet,
   Text,
@@ -9,7 +10,7 @@ import {
   Image,
   ScrollView,
   useWindowDimensions,
-  TouchableOpacityBase,
+  TouchableOpacityBase, Alert,
 } from "react-native";
 import THEME from "../../constants/THEME";
 import Header from "../../navigation/Header";
@@ -20,7 +21,38 @@ const { width, height } = Dimensions.get("screen");
 let announcement;
 announcement = {};
 
+export async function getArticles(){
+  try {
+    let articles = await fetch('${articles_url}?country=${country_code}&category=${category}', {
+      headers: {
+        'X-API-KEY': _api_key
+      }
+    });
+    let result = await articles.json();
+    articles = null;
+    return result;
+  }catch (error){
+    throw(error)
+  }
+}
+
 const HomeScreen = (props) => {
+  const webpage = {
+    isLoading: true,
+    data: null
+  }
+  const dataexported = () => {
+    getArticles().then(data=> {
+    webpage.setState(
+        {
+          isLoading: false,
+          data: data
+        }
+    );}, error => {
+          Alert.alert('error', 'page not loaded');
+        }
+    );
+  }
   const inputTheme = {
     colors: {
       placeholder: 'gray',
@@ -30,6 +62,7 @@ const HomeScreen = (props) => {
     },
   }
   console.log(props);
+  console.log(webpage.data);
   const handleRoleButtons = () => {
     if (props.role === "faculty")
       return (
@@ -288,7 +321,7 @@ const HomeScreen = (props) => {
                     <Text
                       style={{
                         width: width * 0.6,
-                        textAlign: "left",
+                        // textAlign: "left",
 
                         padding: 15,
                         flexWrap: "wrap-reverse",
