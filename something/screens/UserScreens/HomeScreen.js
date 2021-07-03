@@ -62,6 +62,7 @@ const HomeScreen = (props) => {
       underlineColor: "#fff",
     },
   }
+
   const htmlContent = `
     <h1>News !</h1>
     <a href="announcement.txt">text file</a>
