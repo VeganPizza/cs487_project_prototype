@@ -22,20 +22,6 @@ const { width, height } = Dimensions.get("screen");
 // let announcement;
 // announcement = {};
 
-export async function getArticles(){
-  try {
-    let articles = await fetch('${articles_url}?country=${country_code}&category=${category}', {
-      headers: {
-        'X-API-KEY': _api_key
-      }
-    });
-    let result = await articles.json();
-    articles = null;
-    return result;
-  }catch (error){
-    throw(error)
-  }
-}
 
 const HomeScreen = (props) => {
   // const webpage = {
@@ -63,19 +49,15 @@ const HomeScreen = (props) => {
     },
   }
   const htmlContent = `
-    <body class="path-node page-node-type-article navbar-is-fixed-top has-glyphicons">
+    <body class="path-node page-node-type-article navbar-is-fixed-top has-glyphicons"; style="background-color: white">
+    <p style="background-color:white;">
   <a class="visually-hidden focusable skip-link" href="#main-content">
-   Skip to main content
+   Skip to main content</p>
   </a>
   <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
    <header class="navbar navbar-default navbar-fixed-top" id="navbar" role="banner">
     <div class="container-fluid">
      <div class="navbar-header">
-      <div class="region region-navigation">
-       <a class="logo navbar-btn pull-left" href="/" rel="home" title="Home">
-        <img alt="Home" src="/sites/default/files/TechNews%20-%20Copy_0.png"/>
-       </a>
-      </div>
       <button class="navbar-toggle" data-target="#navbar-collapse" data-toggle="collapse" type="button">
        <span class="sr-only">
         Toggle navigation
@@ -632,7 +614,7 @@ const HomeScreen = (props) => {
                   >
                     <Text
                       style={{
-                        width: width * 0.6,
+                        width: width * 0.8,
                         // textAlign: "left",
 
                         padding: 15,
@@ -673,8 +655,8 @@ const HomeScreen = (props) => {
                     </Text>
                     <Image
                       style={{
-                        width: 128,
-                        height: 128,
+                        width: width * 0.15,
+                        height: width * 0.15,
                         resizeMode: "contain",
                         marginVertical: 15,
 
