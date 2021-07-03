@@ -94,7 +94,7 @@ const HomeScreen = (props) => {
                     textAlign:'center'
                   }}
                 >
-                    <object width="300" height="300" type="text/html" data="announcement.txt" border="0" >
+                    <object width="300" height="300" type="text/plain" data="announcement.txt" border="0" >
                     </object>
 
 
