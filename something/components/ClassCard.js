@@ -35,7 +35,14 @@ const ClassCard = (props) => {
     },
   };
   const role = props.role;
-  console.log(props)
+
+  const handleGradeColor = (grade) =>{
+      if (grade >= .8 && grade <=1) return THEME.COLORS.GREEN
+      else if (grade >= .6 && grade < .8) return 'orange'
+      else {
+        return 'red'
+      }
+  }
   return role === "faculty" ? (
     <Animatable.View style={styles.container} animation={fadeIn}>
       <LinearGradient
@@ -134,6 +141,9 @@ const ClassCard = (props) => {
           <View
             style={{ justifyContent: "center", height: "25%", marginTop: 10 }}
           >
+            <View style={{paddingHorizontal:20, backgroundColor:handleGradeColor(props.grade), borderRadius:15, width:width*.3, alignSelf:'center', marginBottom:5, justifyContent:"center", alignItems:'center'}}>
+              <Text style={THEME.TEXT.T5}>Grade: {Math.round(props.grade *100)}%</Text>
+            </View>
             <Text
               style={[
                 THEME.TEXT.T6,

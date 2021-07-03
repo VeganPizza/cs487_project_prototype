@@ -64,7 +64,7 @@ const FacultyScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <Header navigation={props.navigation} title={"User Menu"} logout={true} />
+      <Header navigation={props.navigation} title={"User Menu"} logout={true} username={props.route.params.username} />
       <View style={{ width: "100%", height: height - 10, marginTop: 10 }}>
         <NavigationContainer independent={true}>
           <ScreensHome role={"admin"} />

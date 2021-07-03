@@ -33,7 +33,9 @@ const FirstRoute = () => (
     </NavigationContainer>
   );
 
+  
 const UserScreen = (props) => {
+  
   const [typing, setTyping] = useState(false);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -62,7 +64,7 @@ const UserScreen = (props) => {
  
   return (
     <View style={styles.container}>
-      <Header navigation={props.navigation} title={"User Menu"} logout={true} />
+      <Header navigation={props.navigation} title={"User Menu"} logout={true} username={props.route.params.username} />
       <View style={{width:'100%', height:height-10, marginTop:10}}>
       <TabView
       renderTabBar={renderTabBar}

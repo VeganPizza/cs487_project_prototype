@@ -8,37 +8,37 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  useWindowDimensions
+  useWindowDimensions,
 } from "react-native";
 import THEME from "../constants/THEME";
 import Header from "../navigation/Header";
 import { TextInput, Avatar } from "react-native-paper";
 
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { NavigationContainer } from '@react-navigation/native'
-import ScreensClasses from '../navigation/ScreensClasses'
-import ScreensHome from '../navigation/ScreensHome'
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { NavigationContainer } from "@react-navigation/native";
+import ScreensClasses from "../navigation/ScreensClasses";
+import ScreensHome from "../navigation/ScreensHome";
 import * as Progress from "react-native-progress";
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
 const FirstRoute = () => (
-  <NavigationContainer independent={true} role={'faculty'}>
-  <ScreensHome role={'faculty'}/>
-</NavigationContainer>
-  );
-  
-  const SecondRoute = () => (
-    <NavigationContainer independent={true} role={'faculty'}>
-      <ScreensClasses role={'faculty'}/>
-    </NavigationContainer>
-  );
+  <NavigationContainer independent={true} role={"faculty"}>
+    <ScreensHome role={"faculty"} />
+  </NavigationContainer>
+);
+
+const SecondRoute = () => (
+  <NavigationContainer independent={true} role={"faculty"}>
+    <ScreensClasses role={"faculty"} />
+  </NavigationContainer>
+);
 
 const FacultyScreen = (props) => {
   const [typing, setTyping] = useState(false);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'home', title: 'Home' },
-    { key: 'classes', title: 'Classes' },
+    { key: "home", title: "Home" },
+    { key: "classes", title: "Classes" },
   ]);
   const renderScene = SceneMap({
     home: FirstRoute,
@@ -51,7 +51,9 @@ const FacultyScreen = (props) => {
       {...props}
       renderLabel={({ route, focused, color }) => (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={THEME.TEXT.T5} weight='bold'>{route.title}</Text>
+          <Text style={THEME.TEXT.T5} weight="bold">
+            {route.title}
+          </Text>
         </View>
       )}
       indicatorStyle={{ backgroundColor: THEME.COLORS.BLUE }}
@@ -59,26 +61,24 @@ const FacultyScreen = (props) => {
     />
   );
 
- 
   return (
     <View style={styles.container}>
-      <Header navigation={props.navigation} title={"User Menu"} logout={true} />
-      <View style={{width:'100%', height:height-10, marginTop:10}}>
-      <TabView
-      renderTabBar={renderTabBar}
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }
-
-    }
-    swipeEnabled={false}
-
-    />
-     
+      <Header
+        navigation={props.navigation}
+        title={"User Menu"}
+        logout={true}
+        username={props.route.params.username}
+      />
+      <View style={{ width: "100%", height: height - 10, marginTop: 10 }}>
+        <TabView
+          renderTabBar={renderTabBar}
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={{ width: layout.width }}
+          swipeEnabled={false}
+        />
       </View>
-         
-        
     </View>
   );
 };
@@ -95,11 +95,10 @@ const styles = StyleSheet.create({
     color: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    borderColor:THEME.COLORS.BACKGROUND,
-    borderWidth:0,
-    borderBottomColor:'transparent',
-    borderBottomWidth:0,
-    
+    borderColor: THEME.COLORS.BACKGROUND,
+    borderWidth: 0,
+    borderBottomColor: "transparent",
+    borderBottomWidth: 0,
   },
 });
 

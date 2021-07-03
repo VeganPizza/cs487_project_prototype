@@ -45,7 +45,7 @@ const Header = (props) => {
       {props.logout !== undefined ? (
         <View style={{ justifyContent: "flex-end", position: "absolute", right:15, marginTop:15}}>
           
-          <Text style={[THEME.TEXT.T5, ]}> Current User: <Text style={[THEME.TEXT.T5, {fontWeight:'bold'}]}>Victor</Text></Text>
+          <Text style={[THEME.TEXT.T5, ]}> Current User: <Text style={[THEME.TEXT.T5, {fontWeight:'bold'}]}>{props.username}</Text></Text>
         </View>
       ) : (
         <></>

@@ -19,8 +19,8 @@ import ClassCard from '../../components/ClassCard'
 
 // import Logo from '../images/Logo'
 const { width, height } = Dimensions.get("screen");
-const cardsArrayInfo = [{professor:'Leclainche', className:'CS 350'}, {professor:'Matthew Bauer', className:'CS 340'},
-{professor:'Michael Lee', className:'CS 330'}]
+const cardsArrayInfo = [{professor:'Leclainche', className:'CS 350', grade:1}, {professor:'Matthew Bauer', className:'CS 340', grade:.4},
+{professor:'Michael Lee', className:'CS 330', grade:.78}]
 
 
 const CurrentClasses = (props) => {
@@ -28,7 +28,7 @@ const CurrentClasses = (props) => {
   console.log(role + " rolee")
     const renderCards = () =>{
         let output = []
-        for (const element of cardsArrayInfo) output.push(<ClassCard professor={element.professor} role={role} className={element.className} navigation={props.navigation}/>)
+        for (const element of cardsArrayInfo) output.push(<ClassCard professor={element.professor} role={role} className={element.className} navigation={props.navigation} grade ={element.grade}/>)
             
         return  <ScrollView style={{ height: height * 0.3, width: width }} horizontal={true}>
         {output}

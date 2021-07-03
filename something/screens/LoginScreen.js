@@ -41,8 +41,8 @@ const LoginScreen = (props) => {
 
 
   const handleRouting = (user) => {
-    if (user.role === 'student') props.navigation.navigate('UserScreen')
-    else if (user.role === 'faculty') props.navigation.navigate('FacultyScreen')
+    if (user.role === 'student') props.navigation.navigate('UserScreen', {username: currentUsername})
+    else if (user.role === 'faculty') props.navigation.navigate('FacultyScreen', {username: currentUsername})
     else if (user.role === 'TA') {
       Alert.alert(
         "Multiple Roles Associated to the Account",
@@ -50,15 +50,15 @@ const LoginScreen = (props) => {
         [
           {
             text: "Student",
-            onPress: () => props.navigation.navigate('UserScreen'),
+            onPress: () => props.navigation.navigate('UserScreen', {username: currentUsername}),
           
           },
-          { text: "Faculty", onPress: () => props.navigation.navigate('FacultyScreen') }
+          { text: "Faculty", onPress: () => props.navigation.navigate('FacultyScreen', {username: currentUsername}) }
         ]
       );
       }
     
-    else props.navigation.navigate('AdminScreen')
+    else props.navigation.navigate('AdminScreen', {username: currentUsername})
   }
   // _store = async () = {
   //     try {
@@ -176,6 +176,7 @@ const LoginScreen = (props) => {
               underlineColor={THEME.COLORS.GREEN}
               mode="flat"
               label="Password"
+              secureTextEntry={true}
               style={{
                 backgroundColor: "transparent",
                 color: "white",

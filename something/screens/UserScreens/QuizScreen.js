@@ -69,13 +69,13 @@ const QuizScreen = (props) => {
       state: ([state, setState] = useState(0)),
     },
   ];
-  console.log(questions[0].state[1]);
+  
 
   const handleResults = () => {
     let score = 0;
     for (let question of questions) if (question.state[0] == 1) score += 0.2;
 
-    console.log(score);
+  
     setScore(score);
     setVisibleResult(true);
   };
